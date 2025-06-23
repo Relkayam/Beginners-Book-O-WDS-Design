@@ -1,0 +1,2459 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Branch Network Optimization – Full Example &#8212; Optimizing Water Distribution System Design</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Branch_Calculation_Example';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Designing Branched Water Networks with BNHA" href="Optimization_of_branch_networks.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Optimizing Water Distribution System Design - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Optimizing Water Distribution System Design - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    About this Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="python_essential.html">Python Essentials: Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Economic_diameter.html">Choosing the Optimal Pipe Diameter in a Water Supply System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="branch_calculation.html">Branch Network Hydraulic Analysis</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Optimization_of_branch_networks.html">Designing Branched Water Networks with <code class="docutils literal notranslate"><span class="pre">BNHA</span></code></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Branch Network Optimization – Full Example</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Relkayam/Optimizing-Water-Distribution-System-Design" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Relkayam/Optimizing-Water-Distribution-System-Design/issues/new?title=Issue%20on%20page%20%2FBranch_Calculation_Example.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Branch_Calculation_Example.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Branch Network Optimization – Full Example</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="branch-network-optimization-full-example">
+<h1>Branch Network Optimization – Full Example<a class="headerlink" href="#branch-network-optimization-full-example" title="Link to this heading">#</a></h1>
+<p>This notebook provides a full example of using the <code class="docutils literal notranslate"><span class="pre">branch_calculation</span></code> package to analyze and optimize a branch network. It includes loading a network from a CSV file, analyzing the network, and performing both full section and classic optimization for optimal pipe diameters.</p>
+<ol class="arabic">
+<li><p>go to (<a class="github reference external" href="https://github.com/Relkayam/BNHA/tree/main/data_templates">Relkayam/BNHA</a>) and download the <code class="docutils literal notranslate"><span class="pre">network_tree_template.csv</span></code> and <code class="docutils literal notranslate"><span class="pre">pipe_prices.xlsx</span></code> files.</p></li>
+<li><p>Place the downloaded files in a directory named <code class="docutils literal notranslate"><span class="pre">data_templates</span></code> at the same level as this notebook.</p></li>
+<li><p>Follow the template in <code class="docutils literal notranslate"><span class="pre">network_tree_template.csv</span></code> to create your own network data. The template includes columns for branch names, diameters, lengths, elevations, and other necessary parameters.</p></li>
+<li><p>Edit the pipe prices in <code class="docutils literal notranslate"><span class="pre">pipe_prices.xlsx</span></code> to match your specific requirements. The file should contain the cost per meter for different pipe diameters.</p></li>
+<li><p>install the <code class="docutils literal notranslate"><span class="pre">Branch</span> <span class="pre">Network</span> <span class="pre">Hydraulic</span> <span class="pre">Analyzer</span> <span class="pre">(BNHA)</span></code> package by running the following command in your terminal:</p></li>
+<li><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>branch-network-hydraulics
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="c1"># Load example network CSV (user must provide this)</span>
+<span class="n">project_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+<span class="n">data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">project_path</span><span class="p">,</span> <span class="s2">&quot;data_templates&quot;</span><span class="p">)</span>
+<span class="n">csv_path</span> <span class="o">=</span> <span class="s2">&quot;network_tree_template.csv&quot;</span>
+<span class="n">pipe_prices</span> <span class="o">=</span> <span class="s2">&quot;pipe_prices.xlsx&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">csv_path</span><span class="p">))</span>
+<span class="n">pipe_prices</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">pipe_prices</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">9</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">csv_path</span> <span class="o">=</span> <span class="s2">&quot;network_tree_template.csv&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">pipe_prices</span> <span class="o">=</span> <span class="s2">&quot;pipe_prices.xlsx&quot;</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">csv_path</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">pipe_prices</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">pipe_prices</span><span class="p">))</span>
+
+<span class="nn">File ~\PycharmProjects\Optimizing-Water-Distribution-System-Design\.venv\Lib\site-packages\pandas\io\parsers\readers.py:1026,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1013</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1014</span>     <span class="n">dialect</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1015</span>     <span class="n">delimiter</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>   <span class="mi">1022</span>     <span class="n">dtype_backend</span><span class="o">=</span><span class="n">dtype_backend</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1023</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1024</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1026</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+
+<span class="nn">File ~\PycharmProjects\Optimizing-Water-Distribution-System-Design\.venv\Lib\site-packages\pandas\io\parsers\readers.py:620,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">617</span> <span class="n">_validate_names</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">619</span> <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">620</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">622</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">623</span>     <span class="k">return</span> <span class="n">parser</span>
+
+<span class="nn">File ~\PycharmProjects\Optimizing-Water-Distribution-System-Design\.venv\Lib\site-packages\pandas\io\parsers\readers.py:1620,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1617</span>     <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1619</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">-&gt; </span><span class="mi">1620</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+
+<span class="nn">File ~\PycharmProjects\Optimizing-Water-Distribution-System-Design\.venv\Lib\site-packages\pandas\io\parsers\readers.py:1880,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1878</span>     <span class="k">if</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1879</span>         <span class="n">mode</span> <span class="o">+=</span> <span class="s2">&quot;b&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1880</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1881</span>     <span class="n">f</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1882</span>     <span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1883</span>     <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1884</span>     <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1885</span>     <span class="n">memory_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1886</span>     <span class="n">is_text</span><span class="o">=</span><span class="n">is_text</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1887</span>     <span class="n">errors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding_errors&quot;</span><span class="p">,</span> <span class="s2">&quot;strict&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1888</span>     <span class="n">storage_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1889</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1890</span> <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1891</span> <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="o">.</span><span class="n">handle</span>
+
+<span class="nn">File ~\PycharmProjects\Optimizing-Water-Distribution-System-Design\.venv\Lib\site-packages\pandas\io\common.py:873,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">868</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">869</span>     <span class="c1"># Check whether the filename is to be opened in binary mode.</span>
+<span class="g g-Whitespace">    </span><span class="mi">870</span>     <span class="c1"># Binary mode does not support &#39;encoding&#39; and &#39;newline&#39;.</span>
+<span class="g g-Whitespace">    </span><span class="mi">871</span>     <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">872</span>         <span class="c1"># Encoding</span>
+<span class="ne">--&gt; </span><span class="mi">873</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">874</span>             <span class="n">handle</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">875</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">876</span>             <span class="n">encoding</span><span class="o">=</span><span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">877</span>             <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">878</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">879</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">880</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">881</span>         <span class="c1"># Binary mode</span>
+<span class="g g-Whitespace">    </span><span class="mi">882</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;C:\\Users\\user\\PycharmProjects\\Optimizing-Water-Distribution-System-Design\\content\\data_templates\\network_tree_template.csv&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load the network data</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">branch_calculation.network</span><span class="w"> </span><span class="kn">import</span> <span class="n">BranchNetwork</span>
+
+<span class="c1"># Initialize network and system settings</span>
+<span class="n">net</span> <span class="o">=</span> <span class="n">BranchNetwork</span><span class="p">()</span>
+<span class="n">net</span><span class="o">.</span><span class="n">set_system_data</span><span class="p">(</span><span class="n">reservoir_elevation</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">reservoir_total_head</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">net</span><span class="o">.</span><span class="n">load_from_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>After loading the network, you can view the branches and their properties: Calculations can be performed using various diameters and lengths.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">branch_calculation.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">analyze_network</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">branch_calculation.plots</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_branches</span>
+
+
+<span class="c1"># Analyze network</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">analyze_network</span><span class="p">(</span><span class="n">net</span><span class="p">)</span>
+<span class="n">df_results</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;df_res&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_results</span><span class="p">)</span>
+
+<span class="c1"># Print summary</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;summary&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Here are the available keys in results through &quot;analyze_network&quot; function:&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">plots</span> <span class="o">=</span> <span class="n">plot_branches</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;results_branch&#39;</span><span class="p">],</span> <span class="n">minimum_pressure_constraint</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">branch_calculation.optimizer</span><span class="w"> </span><span class="kn">import</span> <span class="n">full_section_optimal_diameter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">branch_calculation.plots</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_branches</span>
+
+
+<span class="p">(</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;=== Optimization for full section and classic methods  ===&#39;</span><span class="p">))</span>
+<span class="c1"># Perform optimization for full section and classic methods</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">full_section_optimal_diameter</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">pipe_prices</span><span class="p">,</span> <span class="n">minimum_pressure_constraint</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Here are the available keys in results through &quot;full_section_optimal_diameter&quot; function:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">plot_branches</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;results_branch&#39;</span><span class="p">],</span> <span class="n">minimum_pressure_constraint</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">branch_calculation.optimizer</span><span class="w"> </span><span class="kn">import</span> <span class="n">classic_optimal_diameter_optimization</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">branch_calculation.plots</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_branches</span>
+
+
+<span class="p">(</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;=== Classic Optimization for optimal diameter  ===&#39;</span><span class="p">))</span>
+<span class="c1"># perform classic optimization</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">classic_optimal_diameter_optimization</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">pipe_prices</span><span class="p">,</span> <span class="n">minimum_pressure_constraint</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The available keys in results are:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">plot_branches</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;results_branch&#39;</span><span class="p">],</span> <span class="n">minimum_pressure_constraint</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Here are the available keys in results through &quot;classic_optimal_diameter_optimization&quot; function:&#39;</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  var_name Pipe_ID  Diameter_m  Diameter_mm  Velocity_m_s       Reynolds  \
+0   [None]      p2         0.5        500.0      0.212207  105680.573102   
+1   [None]      p1         0.5        500.0      0.226354  112725.944642   
+2   [None]      p4         0.5        500.0      0.070736   35226.857701   
+3   [None]      p6         0.5        500.0      0.141471   70453.715401   
+4   [None]      p5         0.5        500.0      0.014147    7045.371540   
+5   [None]      p3         0.5        500.0      0.070736   35226.857701   
+
+  cost_USD_per_meter Start_Junction End_Junction  length_m cost_USD  \
+0             [None]              a            b       500   [None]   
+1             [None]         source            a      1000   [None]   
+2             [None]              c           v1       700   [None]   
+3             [None]              b           v3      2000   [None]   
+4             [None]              a           v2       300   [None]   
+5             [None]              b            c       200   [None]   
+
+   End_Junction_Elevation_m  static_head  Flow_cms  flow_cmh      dz  hwc  \
+0                       270   299.850412  0.041667     150.0  [None]  140   
+1                       250   299.896383  0.044444     160.0  [None]  140   
+2                       230   299.839594  0.013889      50.0  [None]  140   
+3                       240   299.763630  0.027778     100.0  [None]  140   
+4                       230   299.896200  0.002778      10.0  [None]  140   
+5                       250   299.848008  0.013889      50.0  [None]  140   
+
+  end_junc_path hydraulic_gradient_per_m headloss_per_m lp_vars Results  \
+0         p1,p2                   [None]         [None]  [None]  [None]   
+1            p1                   [None]         [None]  [None]  [None]   
+2   p1,p2,p3,p4                   [None]         [None]  [None]  [None]   
+3      p1,p2,p6                   [None]         [None]  [None]  [None]   
+4         p1,p5                   [None]         [None]  [None]  [None]   
+5      p1,p2,p3                   [None]         [None]  [None]  [None]   
+
+  pipe_updated headloss end_junc_path_updated  branch_end corrected_dz  \
+0       [None]   [None]                [None]           0       [None]   
+1       [None]   [None]                [None]           0       [None]   
+2       [None]   [None]                [None]           1       [None]   
+3       [None]   [None]                [None]           1       [None]   
+4       [None]   [None]                [None]           1       [None]   
+5       [None]   [None]                [None]           0       [None]   
+
+   total_head_losses  Total_Head_m  Pressure_Head_m  Distance_from_Source_m  
+0          29.850412    299.850412        29.850412                  1500.0  
+1          49.896383    299.896383        49.896383                  1000.0  
+2          69.839594    299.839594        69.839594                  2400.0  
+3          59.763630    299.763630        59.763630                  3500.0  
+4          69.896200    299.896200        69.896200                  1300.0  
+5          49.848008    299.848008        49.848008                  1700.0  
+
+=== SYSTEM SUMMARY ===
+total_head_loss: 0.2363703824156005
+min_pressure_head: 29.85041159714325
+max_velocity: 0.22635369684180673
+pressure_adequate: True
+velocity_acceptable: True
+critical_node: b
+=== 1  ===
+dict_keys([&#39;summary&#39;, &#39;branches_end&#39;, &#39;results_branch&#39;, &#39;df_res&#39;, &#39;pipes_summery&#39;])
+summary: {&#39;total_head_loss&#39;: np.float64(0.2363703824156005), &#39;min_pressure_head&#39;: np.float64(29.85041159714325), &#39;max_velocity&#39;: np.float64(0.22635369684180673), &#39;pressure_adequate&#39;: np.True_, &#39;velocity_acceptable&#39;: np.True_, &#39;critical_node&#39;: &#39;b&#39;}
+branches_end: [&#39;p1,p2,p3,p4&#39;, &#39;p1,p2,p6&#39;, &#39;p1,p5&#39;]
+results_branch: {&#39;p1,p2,p3,p4&#39;:   var_name Pipe_ID  Diameter_m  Diameter_mm  Velocity_m_s       Reynolds  \
+1   [None]      p1         0.5        500.0      0.226354  112725.944642   
+0   [None]      p2         0.5        500.0      0.212207  105680.573102   
+5   [None]      p3         0.5        500.0      0.070736   35226.857701   
+2   [None]      p4         0.5        500.0      0.070736   35226.857701   
+
+  cost_USD_per_meter Start_Junction End_Junction  length_m cost_USD  \
+1             [None]         source            a      1000   [None]   
+0             [None]              a            b       500   [None]   
+5             [None]              b            c       200   [None]   
+2             [None]              c           v1       700   [None]   
+
+   End_Junction_Elevation_m  static_head  Flow_cms  flow_cmh      dz  hwc  \
+1                       250   299.896383  0.044444     160.0  [None]  140   
+0                       270   299.850412  0.041667     150.0  [None]  140   
+5                       250   299.848008  0.013889      50.0  [None]  140   
+2                       230   299.839594  0.013889      50.0  [None]  140   
+
+  end_junc_path hydraulic_gradient_per_m headloss_per_m lp_vars Results  \
+1            p1                   [None]         [None]  [None]  [None]   
+0         p1,p2                   [None]         [None]  [None]  [None]   
+5      p1,p2,p3                   [None]         [None]  [None]  [None]   
+2   p1,p2,p3,p4                   [None]         [None]  [None]  [None]   
+
+  pipe_updated headloss end_junc_path_updated  branch_end corrected_dz  \
+1       [None]   [None]                [None]           0       [None]   
+0       [None]   [None]                [None]           0       [None]   
+5       [None]   [None]                [None]           0       [None]   
+2       [None]   [None]                [None]           1       [None]   
+
+   total_head_losses  Total_Head_m  Pressure_Head_m  Distance_from_Source_m  \
+1          49.896383    299.896383        49.896383                    1000   
+0          29.850412    299.850412        29.850412                    1500   
+5          49.848008    299.848008        49.848008                    1700   
+2          69.839594    299.839594        69.839594                    2400   
+
+   sort_index  
+1         1.0  
+0         2.0  
+5         3.0  
+2         4.0  , &#39;p1,p2,p6&#39;:   var_name Pipe_ID  Diameter_m  Diameter_mm  Velocity_m_s       Reynolds  \
+1   [None]      p1         0.5        500.0      0.226354  112725.944642   
+0   [None]      p2         0.5        500.0      0.212207  105680.573102   
+3   [None]      p6         0.5        500.0      0.141471   70453.715401   
+
+  cost_USD_per_meter Start_Junction End_Junction  length_m cost_USD  \
+1             [None]         source            a      1000   [None]   
+0             [None]              a            b       500   [None]   
+3             [None]              b           v3      2000   [None]   
+
+   End_Junction_Elevation_m  static_head  Flow_cms  flow_cmh      dz  hwc  \
+1                       250   299.896383  0.044444     160.0  [None]  140   
+0                       270   299.850412  0.041667     150.0  [None]  140   
+3                       240   299.763630  0.027778     100.0  [None]  140   
+
+  end_junc_path hydraulic_gradient_per_m headloss_per_m lp_vars Results  \
+1            p1                   [None]         [None]  [None]  [None]   
+0         p1,p2                   [None]         [None]  [None]  [None]   
+3      p1,p2,p6                   [None]         [None]  [None]  [None]   
+
+  pipe_updated headloss end_junc_path_updated  branch_end corrected_dz  \
+1       [None]   [None]                [None]           0       [None]   
+0       [None]   [None]                [None]           0       [None]   
+3       [None]   [None]                [None]           1       [None]   
+
+   total_head_losses  Total_Head_m  Pressure_Head_m  Distance_from_Source_m  \
+1          49.896383    299.896383        49.896383                    1000   
+0          29.850412    299.850412        29.850412                    1500   
+3          59.763630    299.763630        59.763630                    3500   
+
+   sort_index  
+1         1.0  
+0         2.0  
+3         3.0  , &#39;p1,p5&#39;:   var_name Pipe_ID  Diameter_m  Diameter_mm  Velocity_m_s       Reynolds  \
+1   [None]      p1         0.5        500.0      0.226354  112725.944642   
+4   [None]      p5         0.5        500.0      0.014147    7045.371540   
+
+  cost_USD_per_meter Start_Junction End_Junction  length_m cost_USD  \
+1             [None]         source            a      1000   [None]   
+4             [None]              a           v2       300   [None]   
+
+   End_Junction_Elevation_m  static_head  Flow_cms  flow_cmh      dz  hwc  \
+1                       250   299.896383  0.044444     160.0  [None]  140   
+4                       230   299.896200  0.002778      10.0  [None]  140   
+
+  end_junc_path hydraulic_gradient_per_m headloss_per_m lp_vars Results  \
+1            p1                   [None]         [None]  [None]  [None]   
+4         p1,p5                   [None]         [None]  [None]  [None]   
+
+  pipe_updated headloss end_junc_path_updated  branch_end corrected_dz  \
+1       [None]   [None]                [None]           0       [None]   
+4       [None]   [None]                [None]           1       [None]   
+
+   total_head_losses  Total_Head_m  Pressure_Head_m  Distance_from_Source_m  \
+1          49.896383    299.896383        49.896383                    1000   
+4          69.896200    299.896200        69.896200                    1300   
+
+   sort_index  
+1         1.0  
+4         2.0  }
+df_res:
+  var_name Pipe_ID  Diameter_m  Diameter_mm  Velocity_m_s       Reynolds  \
+0   [None]      p2         0.5        500.0      0.212207  105680.573102   
+1   [None]      p1         0.5        500.0      0.226354  112725.944642   
+2   [None]      p4         0.5        500.0      0.070736   35226.857701   
+3   [None]      p6         0.5        500.0      0.141471   70453.715401   
+4   [None]      p5         0.5        500.0      0.014147    7045.371540   
+5   [None]      p3         0.5        500.0      0.070736   35226.857701   
+
+  cost_USD_per_meter Start_Junction End_Junction  length_m cost_USD  \
+0             [None]              a            b       500   [None]   
+1             [None]         source            a      1000   [None]   
+2             [None]              c           v1       700   [None]   
+3             [None]              b           v3      2000   [None]   
+4             [None]              a           v2       300   [None]   
+5             [None]              b            c       200   [None]   
+
+   End_Junction_Elevation_m  static_head  Flow_cms  flow_cmh      dz  hwc  \
+0                       270   299.850412  0.041667     150.0  [None]  140   
+1                       250   299.896383  0.044444     160.0  [None]  140   
+2                       230   299.839594  0.013889      50.0  [None]  140   
+3                       240   299.763630  0.027778     100.0  [None]  140   
+4                       230   299.896200  0.002778      10.0  [None]  140   
+5                       250   299.848008  0.013889      50.0  [None]  140   
+
+  end_junc_path hydraulic_gradient_per_m headloss_per_m lp_vars Results  \
+0         p1,p2                   [None]         [None]  [None]  [None]   
+1            p1                   [None]         [None]  [None]  [None]   
+2   p1,p2,p3,p4                   [None]         [None]  [None]  [None]   
+3      p1,p2,p6                   [None]         [None]  [None]  [None]   
+4         p1,p5                   [None]         [None]  [None]  [None]   
+5      p1,p2,p3                   [None]         [None]  [None]  [None]   
+
+  pipe_updated headloss end_junc_path_updated  branch_end corrected_dz  \
+0       [None]   [None]                [None]           0       [None]   
+1       [None]   [None]                [None]           0       [None]   
+2       [None]   [None]                [None]           1       [None]   
+3       [None]   [None]                [None]           1       [None]   
+4       [None]   [None]                [None]           1       [None]   
+5       [None]   [None]                [None]           0       [None]   
+
+   total_head_losses  Total_Head_m  Pressure_Head_m  Distance_from_Source_m  
+0          29.850412    299.850412        29.850412                  1500.0  
+1          49.896383    299.896383        49.896383                  1000.0  
+2          69.839594    299.839594        69.839594                  2400.0  
+3          59.763630    299.763630        59.763630                  3500.0  
+4          69.896200    299.896200        69.896200                  1300.0  
+5          49.848008    299.848008        49.848008                  1700.0  
+
+pipes_summery:
+  Pipe_ID  Diameter_mm  Velocity_m_s  length_m  flow_cmh headloss
+0      p2        500.0      0.212207       500     150.0   [None]
+1      p1        500.0      0.226354      1000     160.0   [None]
+2      p4        500.0      0.070736       700      50.0   [None]
+3      p6        500.0      0.141471      2000     100.0   [None]
+4      p5        500.0      0.014147       300      10.0   [None]
+5      p3        500.0      0.070736       200      50.0   [None]
+
+========Plot Branch:  p1,p2,p3,p4 ========
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>========Plot Branch:  p1,p2,p6 ========
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>========Plot Branch:  p1,p5 ========
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== 2  ===
+Writing debug information to debug_model.txt
+Debug information written to debug_model.txt
+=== OPTIMIZATION RESULTS ===
+Optimal
+
+The available keys in results are:
+dict_keys([&#39;slack&#39;, &#39;debug&#39;, &#39;CONSTRAINT VIOLATION&#39;, &#39;model&#39;, &#39;status&#39;, &#39;df_model&#39;, &#39;total_cost_of_operation&#39;, &#39;branches_end&#39;, &#39;results_branch&#39;, &#39;df_res&#39;, &#39;pipes_summery&#39;])
+slack: {}
+debug: debug_model.txt
+CONSTRAINT VIOLATION: {}
+model: economic_diameter:
+MINIMIZE
+2000.0*p1_0.0254 + 5000.0*p1_0.0508 + 8000.0*p1_0.0762 + 11000.0*p1_0.1016 + 16000.0*p1_0.1524 + 23000.0*p1_0.2032 + 32000.0*p1_0.254 + 50000.0*p1_0.3048 + 60000.0*p1_0.3556 + 90000.0*p1_0.4064 + 130000.0*p1_0.4572 + 170000.0*p1_0.508 + 300000.0*p1_0.5588 + 550000.0*p1_0.6096 + 1000.0*p2_0.0254 + 2500.0*p2_0.0508 + 4000.0*p2_0.0762 + 5500.0*p2_0.1016 + 8000.0*p2_0.1524 + 11500.0*p2_0.2032 + 16000.0*p2_0.254 + 25000.0*p2_0.3048 + 30000.0*p2_0.3556 + 45000.0*p2_0.4064 + 65000.0*p2_0.4572 + 85000.0*p2_0.508 + 150000.0*p2_0.5588 + 275000.0*p2_0.6096 + 400.0*p3_0.0254 + 1000.0*p3_0.0508 + 1600.0*p3_0.0762 + 2200.0*p3_0.1016 + 3200.0*p3_0.1524 + 4600.0*p3_0.2032 + 6400.0*p3_0.254 + 10000.0*p3_0.3048 + 12000.0*p3_0.3556 + 18000.0*p3_0.4064 + 26000.0*p3_0.4572 + 34000.0*p3_0.508 + 60000.0*p3_0.5588 + 110000.0*p3_0.6096 + 1400.0*p4_0.0254 + 3500.0*p4_0.0508 + 5600.0*p4_0.0762 + 7700.0*p4_0.1016 + 11200.0*p4_0.1524 + 16100.0*p4_0.2032 + 22400.0*p4_0.254 + 35000.0*p4_0.3048 + 42000.0*p4_0.3556 + 63000.0*p4_0.4064 + 91000.0*p4_0.4572 + 119000.0*p4_0.508 + 210000.0*p4_0.5588 + 385000.0*p4_0.6096 + 600.0*p5_0.0254 + 1500.0*p5_0.0508 + 2400.0*p5_0.0762 + 3300.0*p5_0.1016 + 4800.0*p5_0.1524 + 6900.0*p5_0.2032 + 9600.0*p5_0.254 + 15000.0*p5_0.3048 + 18000.0*p5_0.3556 + 27000.0*p5_0.4064 + 39000.0*p5_0.4572 + 51000.0*p5_0.508 + 90000.0*p5_0.5588 + 165000.0*p5_0.6096 + 4000.0*p6_0.0254 + 10000.0*p6_0.0508 + 16000.0*p6_0.0762 + 22000.0*p6_0.1016 + 32000.0*p6_0.1524 + 46000.0*p6_0.2032 + 64000.0*p6_0.254 + 100000.0*p6_0.3048 + 120000.0*p6_0.3556 + 180000.0*p6_0.4064 + 260000.0*p6_0.4572 + 340000.0*p6_0.508 + 600000.0*p6_0.5588 + 1100000.0*p6_0.6096 + 0.0
+SUBJECT TO
+_C1: p1_0.0254 + p1_0.0508 + p1_0.0762 + p1_0.1016 + p1_0.1524 + p1_0.2032
+ + p1_0.254 + p1_0.3048 + p1_0.3556 + p1_0.4064 + p1_0.4572 + p1_0.508
+ + p1_0.5588 + p1_0.6096 = 1
+
+_C2: p2_0.0254 + p2_0.0508 + p2_0.0762 + p2_0.1016 + p2_0.1524 + p2_0.2032
+ + p2_0.254 + p2_0.3048 + p2_0.3556 + p2_0.4064 + p2_0.4572 + p2_0.508
+ + p2_0.5588 + p2_0.6096 = 1
+
+_C3: p3_0.0254 + p3_0.0508 + p3_0.0762 + p3_0.1016 + p3_0.1524 + p3_0.2032
+ + p3_0.254 + p3_0.3048 + p3_0.3556 + p3_0.4064 + p3_0.4572 + p3_0.508
+ + p3_0.5588 + p3_0.6096 = 1
+
+_C4: p4_0.0254 + p4_0.0508 + p4_0.0762 + p4_0.1016 + p4_0.1524 + p4_0.2032
+ + p4_0.254 + p4_0.3048 + p4_0.3556 + p4_0.4064 + p4_0.4572 + p4_0.508
+ + p4_0.5588 + p4_0.6096 = 1
+
+_C5: p5_0.0254 + p5_0.0508 + p5_0.0762 + p5_0.1016 + p5_0.1524 + p5_0.2032
+ + p5_0.254 + p5_0.3048 + p5_0.3556 + p5_0.4064 + p5_0.4572 + p5_0.508
+ + p5_0.5588 + p5_0.6096 = 1
+
+_C6: p6_0.0254 + p6_0.0508 + p6_0.0762 + p6_0.1016 + p6_0.1524 + p6_0.2032
+ + p6_0.254 + p6_0.3048 + p6_0.3556 + p6_0.4064 + p6_0.4572 + p6_0.508
+ + p6_0.5588 + p6_0.6096 = 1
+
+_C7: 208157.057639 p1_0.0254 + 7116.30657503 p1_0.0508
+ + 987.688009304 p1_0.0762 + 243.28658295 p1_0.1016 + 33.7662856808 p1_0.1524
+ + 8.31728661764 p1_0.2032 + 2.80537640761 p1_0.254 + 1.15437469923 p1_0.3048
+ + 0.544865306115 p1_0.3556 + 0.284344725636 p1_0.4064
+ + 0.160218230715 p1_0.4572 + 0.0959079591218 p1_0.508
+ + 0.060291448195 p1_0.5588 + 0.0394648365776 p1_0.6096 &lt;= 48
+
+_C8: 208157.057639 p1_0.0254 + 7116.30657503 p1_0.0508
+ + 987.688009304 p1_0.0762 + 243.28658295 p1_0.1016 + 33.7662856808 p1_0.1524
+ + 8.31728661764 p1_0.2032 + 2.80537640761 p1_0.254 + 1.15437469923 p1_0.3048
+ + 0.544865306115 p1_0.3556 + 0.284344725636 p1_0.4064
+ + 0.160218230715 p1_0.4572 + 0.0959079591218 p1_0.508
+ + 0.060291448195 p1_0.5588 + 0.0394648365776 p1_0.6096
+ + 92353.2000954 p2_0.0254 + 3157.2971511 p2_0.0508 + 438.208290364 p2_0.0762
+ + 107.939143311 p2_0.1016 + 14.981113652 p2_0.1524 + 3.69013688012 p2_0.2032
+ + 1.24466348465 p2_0.254 + 0.512162300873 p2_0.3048
+ + 0.241740804811 p2_0.3556 + 0.126155440707 p2_0.4064
+ + 0.0710841442897 p2_0.4572 + 0.0425515571751 p2_0.508
+ + 0.0267495526808 p2_0.5588 + 0.017509394063 p2_0.6096 &lt;= 28
+
+_C9: 208157.057639 p1_0.0254 + 7116.30657503 p1_0.0508
+ + 987.688009304 p1_0.0762 + 243.28658295 p1_0.1016 + 33.7662856808 p1_0.1524
+ + 8.31728661764 p1_0.2032 + 2.80537640761 p1_0.254 + 1.15437469923 p1_0.3048
+ + 0.544865306115 p1_0.3556 + 0.284344725636 p1_0.4064
+ + 0.160218230715 p1_0.4572 + 0.0959079591218 p1_0.508
+ + 0.060291448195 p1_0.5588 + 0.0394648365776 p1_0.6096
+ + 92353.2000954 p2_0.0254 + 3157.2971511 p2_0.0508 + 438.208290364 p2_0.0762
+ + 107.939143311 p2_0.1016 + 14.981113652 p2_0.1524 + 3.69013688012 p2_0.2032
+ + 1.24466348465 p2_0.254 + 0.512162300873 p2_0.3048
+ + 0.241740804811 p2_0.3556 + 0.126155440707 p2_0.4064
+ + 0.0710841442897 p2_0.4572 + 0.0425515571751 p2_0.508
+ + 0.0267495526808 p2_0.5588 + 0.017509394063 p2_0.6096
+ + 4829.29100664 p3_0.0254 + 165.09992855 p3_0.0508 + 22.9145861054 p3_0.0762
+ + 5.64430397127 p3_0.1016 + 0.783385495624 p3_0.1524
+ + 0.192962938263 p3_0.2032 + 0.0650853697166 p3_0.254
+ + 0.0267817551638 p3_0.3048 + 0.0126409988328 p3_0.3556
+ + 0.0065968622053 p3_0.4064 + 0.0037170993358 p3_0.4572
+ + 0.00222508643092 p3_0.508 + 0.00139877528943 p3_0.5588
+ + 0.000915593170489 p3_0.6096 &lt;= 48
+
+_C10: 208157.057639 p1_0.0254 + 7116.30657503 p1_0.0508
+ + 987.688009304 p1_0.0762 + 243.28658295 p1_0.1016 + 33.7662856808 p1_0.1524
+ + 8.31728661764 p1_0.2032 + 2.80537640761 p1_0.254 + 1.15437469923 p1_0.3048
+ + 0.544865306115 p1_0.3556 + 0.284344725636 p1_0.4064
+ + 0.160218230715 p1_0.4572 + 0.0959079591218 p1_0.508
+ + 0.060291448195 p1_0.5588 + 0.0394648365776 p1_0.6096
+ + 92353.2000954 p2_0.0254 + 3157.2971511 p2_0.0508 + 438.208290364 p2_0.0762
+ + 107.939143311 p2_0.1016 + 14.981113652 p2_0.1524 + 3.69013688012 p2_0.2032
+ + 1.24466348465 p2_0.254 + 0.512162300873 p2_0.3048
+ + 0.241740804811 p2_0.3556 + 0.126155440707 p2_0.4064
+ + 0.0710841442897 p2_0.4572 + 0.0425515571751 p2_0.508
+ + 0.0267495526808 p2_0.5588 + 0.017509394063 p2_0.6096
+ + 4829.29100664 p3_0.0254 + 165.09992855 p3_0.0508 + 22.9145861054 p3_0.0762
+ + 5.64430397127 p3_0.1016 + 0.783385495624 p3_0.1524
+ + 0.192962938263 p3_0.2032 + 0.0650853697166 p3_0.254
+ + 0.0267817551638 p3_0.3048 + 0.0126409988328 p3_0.3556
+ + 0.0065968622053 p3_0.4064 + 0.0037170993358 p3_0.4572
+ + 0.00222508643092 p3_0.508 + 0.00139877528943 p3_0.5588
+ + 0.000915593170489 p3_0.6096 + 16902.5185233 p4_0.0254
+ + 577.849749925 p4_0.0508 + 80.2010513688 p4_0.0762 + 19.7550638994 p4_0.1016
+ + 2.74184923468 p4_0.1524 + 0.675370283922 p4_0.2032
+ + 0.227798794008 p4_0.254 + 0.0937361430732 p4_0.3048
+ + 0.0442434959149 p4_0.3556 + 0.0230890177185 p4_0.4064
+ + 0.0130098476753 p4_0.4572 + 0.00778780250823 p4_0.508
+ + 0.00489571351301 p4_0.5588 + 0.00320457609671 p4_0.6096 &lt;= 68
+
+_C11: 208157.057639 p1_0.0254 + 7116.30657503 p1_0.0508
+ + 987.688009304 p1_0.0762 + 243.28658295 p1_0.1016 + 33.7662856808 p1_0.1524
+ + 8.31728661764 p1_0.2032 + 2.80537640761 p1_0.254 + 1.15437469923 p1_0.3048
+ + 0.544865306115 p1_0.3556 + 0.284344725636 p1_0.4064
+ + 0.160218230715 p1_0.4572 + 0.0959079591218 p1_0.508
+ + 0.060291448195 p1_0.5588 + 0.0394648365776 p1_0.6096
+ + 367.690312089 p5_0.0254 + 12.5703015559 p5_0.0508 + 1.74466009708 p5_0.0762
+ + 0.429743390048 p5_0.1016 + 0.0596450404368 p5_0.1524
+ + 0.0146917224276 p5_0.2032 + 0.00495543960193 p5_0.254
+ + 0.00203909681585 p5_0.3048 + 0.000962454488572 p5_0.3556
+ + 0.000502268825743 p5_0.4064 + 0.000283010780043 p5_0.4572
+ + 0.000169412595573 p5_0.508 + 0.00010649930228 p5_0.5588
+ + 6.9711006883e-05 p5_0.6096 &lt;= 68
+
+_C12: 208157.057639 p1_0.0254 + 7116.30657503 p1_0.0508
+ + 987.688009304 p1_0.0762 + 243.28658295 p1_0.1016 + 33.7662856808 p1_0.1524
+ + 8.31728661764 p1_0.2032 + 2.80537640761 p1_0.254 + 1.15437469923 p1_0.3048
+ + 0.544865306115 p1_0.3556 + 0.284344725636 p1_0.4064
+ + 0.160218230715 p1_0.4572 + 0.0959079591218 p1_0.508
+ + 0.060291448195 p1_0.5588 + 0.0394648365776 p1_0.6096
+ + 92353.2000954 p2_0.0254 + 3157.2971511 p2_0.0508 + 438.208290364 p2_0.0762
+ + 107.939143311 p2_0.1016 + 14.981113652 p2_0.1524 + 3.69013688012 p2_0.2032
+ + 1.24466348465 p2_0.254 + 0.512162300873 p2_0.3048
+ + 0.241740804811 p2_0.3556 + 0.126155440707 p2_0.4064
+ + 0.0710841442897 p2_0.4572 + 0.0425515571751 p2_0.508
+ + 0.0267495526808 p2_0.5588 + 0.017509394063 p2_0.6096
+ + 174337.545865 p6_0.0254 + 5960.11222482 p6_0.0508 + 827.217225184 p6_0.0762
+ + 203.759537604 p6_0.1016 + 28.2802391874 p6_0.1524 + 6.96596768624 p6_0.2032
+ + 2.34958374065 p6_0.254 + 0.966822140721 p6_0.3048
+ + 0.456340425699 p6_0.3556 + 0.23814691757 p6_0.4064
+ + 0.134187394184 p6_0.4572 + 0.080325684903 p6_0.508
+ + 0.0504958286507 p6_0.5588 + 0.033052940097 p6_0.6096 &lt;= 58
+
+VARIABLES
+0 &lt;= p1_0.0254 &lt;= 1 Integer
+0 &lt;= p1_0.0508 &lt;= 1 Integer
+0 &lt;= p1_0.0762 &lt;= 1 Integer
+0 &lt;= p1_0.1016 &lt;= 1 Integer
+0 &lt;= p1_0.1524 &lt;= 1 Integer
+0 &lt;= p1_0.2032 &lt;= 1 Integer
+0 &lt;= p1_0.254 &lt;= 1 Integer
+0 &lt;= p1_0.3048 &lt;= 1 Integer
+0 &lt;= p1_0.3556 &lt;= 1 Integer
+0 &lt;= p1_0.4064 &lt;= 1 Integer
+0 &lt;= p1_0.4572 &lt;= 1 Integer
+0 &lt;= p1_0.508 &lt;= 1 Integer
+0 &lt;= p1_0.5588 &lt;= 1 Integer
+0 &lt;= p1_0.6096 &lt;= 1 Integer
+0 &lt;= p2_0.0254 &lt;= 1 Integer
+0 &lt;= p2_0.0508 &lt;= 1 Integer
+0 &lt;= p2_0.0762 &lt;= 1 Integer
+0 &lt;= p2_0.1016 &lt;= 1 Integer
+0 &lt;= p2_0.1524 &lt;= 1 Integer
+0 &lt;= p2_0.2032 &lt;= 1 Integer
+0 &lt;= p2_0.254 &lt;= 1 Integer
+0 &lt;= p2_0.3048 &lt;= 1 Integer
+0 &lt;= p2_0.3556 &lt;= 1 Integer
+0 &lt;= p2_0.4064 &lt;= 1 Integer
+0 &lt;= p2_0.4572 &lt;= 1 Integer
+0 &lt;= p2_0.508 &lt;= 1 Integer
+0 &lt;= p2_0.5588 &lt;= 1 Integer
+0 &lt;= p2_0.6096 &lt;= 1 Integer
+0 &lt;= p3_0.0254 &lt;= 1 Integer
+0 &lt;= p3_0.0508 &lt;= 1 Integer
+0 &lt;= p3_0.0762 &lt;= 1 Integer
+0 &lt;= p3_0.1016 &lt;= 1 Integer
+0 &lt;= p3_0.1524 &lt;= 1 Integer
+0 &lt;= p3_0.2032 &lt;= 1 Integer
+0 &lt;= p3_0.254 &lt;= 1 Integer
+0 &lt;= p3_0.3048 &lt;= 1 Integer
+0 &lt;= p3_0.3556 &lt;= 1 Integer
+0 &lt;= p3_0.4064 &lt;= 1 Integer
+0 &lt;= p3_0.4572 &lt;= 1 Integer
+0 &lt;= p3_0.508 &lt;= 1 Integer
+0 &lt;= p3_0.5588 &lt;= 1 Integer
+0 &lt;= p3_0.6096 &lt;= 1 Integer
+0 &lt;= p4_0.0254 &lt;= 1 Integer
+0 &lt;= p4_0.0508 &lt;= 1 Integer
+0 &lt;= p4_0.0762 &lt;= 1 Integer
+0 &lt;= p4_0.1016 &lt;= 1 Integer
+0 &lt;= p4_0.1524 &lt;= 1 Integer
+0 &lt;= p4_0.2032 &lt;= 1 Integer
+0 &lt;= p4_0.254 &lt;= 1 Integer
+0 &lt;= p4_0.3048 &lt;= 1 Integer
+0 &lt;= p4_0.3556 &lt;= 1 Integer
+0 &lt;= p4_0.4064 &lt;= 1 Integer
+0 &lt;= p4_0.4572 &lt;= 1 Integer
+0 &lt;= p4_0.508 &lt;= 1 Integer
+0 &lt;= p4_0.5588 &lt;= 1 Integer
+0 &lt;= p4_0.6096 &lt;= 1 Integer
+0 &lt;= p5_0.0254 &lt;= 1 Integer
+0 &lt;= p5_0.0508 &lt;= 1 Integer
+0 &lt;= p5_0.0762 &lt;= 1 Integer
+0 &lt;= p5_0.1016 &lt;= 1 Integer
+0 &lt;= p5_0.1524 &lt;= 1 Integer
+0 &lt;= p5_0.2032 &lt;= 1 Integer
+0 &lt;= p5_0.254 &lt;= 1 Integer
+0 &lt;= p5_0.3048 &lt;= 1 Integer
+0 &lt;= p5_0.3556 &lt;= 1 Integer
+0 &lt;= p5_0.4064 &lt;= 1 Integer
+0 &lt;= p5_0.4572 &lt;= 1 Integer
+0 &lt;= p5_0.508 &lt;= 1 Integer
+0 &lt;= p5_0.5588 &lt;= 1 Integer
+0 &lt;= p5_0.6096 &lt;= 1 Integer
+0 &lt;= p6_0.0254 &lt;= 1 Integer
+0 &lt;= p6_0.0508 &lt;= 1 Integer
+0 &lt;= p6_0.0762 &lt;= 1 Integer
+0 &lt;= p6_0.1016 &lt;= 1 Integer
+0 &lt;= p6_0.1524 &lt;= 1 Integer
+0 &lt;= p6_0.2032 &lt;= 1 Integer
+0 &lt;= p6_0.254 &lt;= 1 Integer
+0 &lt;= p6_0.3048 &lt;= 1 Integer
+0 &lt;= p6_0.3556 &lt;= 1 Integer
+0 &lt;= p6_0.4064 &lt;= 1 Integer
+0 &lt;= p6_0.4572 &lt;= 1 Integer
+0 &lt;= p6_0.508 &lt;= 1 Integer
+0 &lt;= p6_0.5588 &lt;= 1 Integer
+0 &lt;= p6_0.6096 &lt;= 1 Integer
+
+status: Optimal
+df_model:
+     var_name Pipe_ID  Diameter_m  cost_USD_per_meter Start_Junction  \
+0   p1_0.0254      p1      0.0254                 2.0         source   
+1   p1_0.0508      p1      0.0508                 5.0         source   
+2   p1_0.0762      p1      0.0762                 8.0         source   
+3   p1_0.1016      p1      0.1016                11.0         source   
+4   p1_0.1524      p1      0.1524                16.0         source   
+5   p1_0.2032      p1      0.2032                23.0         source   
+6    p1_0.254      p1      0.2540                32.0         source   
+7   p1_0.3048      p1      0.3048                50.0         source   
+8   p1_0.3556      p1      0.3556                60.0         source   
+9   p1_0.4064      p1      0.4064                90.0         source   
+10  p1_0.4572      p1      0.4572               130.0         source   
+11   p1_0.508      p1      0.5080               170.0         source   
+12  p1_0.5588      p1      0.5588               300.0         source   
+13  p1_0.6096      p1      0.6096               550.0         source   
+14  p2_0.0254      p2      0.0254                 2.0              a   
+15  p2_0.0508      p2      0.0508                 5.0              a   
+16  p2_0.0762      p2      0.0762                 8.0              a   
+17  p2_0.1016      p2      0.1016                11.0              a   
+18  p2_0.1524      p2      0.1524                16.0              a   
+19  p2_0.2032      p2      0.2032                23.0              a   
+20   p2_0.254      p2      0.2540                32.0              a   
+21  p2_0.3048      p2      0.3048                50.0              a   
+22  p2_0.3556      p2      0.3556                60.0              a   
+23  p2_0.4064      p2      0.4064                90.0              a   
+24  p2_0.4572      p2      0.4572               130.0              a   
+25   p2_0.508      p2      0.5080               170.0              a   
+26  p2_0.5588      p2      0.5588               300.0              a   
+27  p2_0.6096      p2      0.6096               550.0              a   
+28  p3_0.0254      p3      0.0254                 2.0              b   
+29  p3_0.0508      p3      0.0508                 5.0              b   
+30  p3_0.0762      p3      0.0762                 8.0              b   
+31  p3_0.1016      p3      0.1016                11.0              b   
+32  p3_0.1524      p3      0.1524                16.0              b   
+33  p3_0.2032      p3      0.2032                23.0              b   
+34   p3_0.254      p3      0.2540                32.0              b   
+35  p3_0.3048      p3      0.3048                50.0              b   
+36  p3_0.3556      p3      0.3556                60.0              b   
+37  p3_0.4064      p3      0.4064                90.0              b   
+38  p3_0.4572      p3      0.4572               130.0              b   
+39   p3_0.508      p3      0.5080               170.0              b   
+40  p3_0.5588      p3      0.5588               300.0              b   
+41  p3_0.6096      p3      0.6096               550.0              b   
+42  p4_0.0254      p4      0.0254                 2.0              c   
+43  p4_0.0508      p4      0.0508                 5.0              c   
+44  p4_0.0762      p4      0.0762                 8.0              c   
+45  p4_0.1016      p4      0.1016                11.0              c   
+46  p4_0.1524      p4      0.1524                16.0              c   
+47  p4_0.2032      p4      0.2032                23.0              c   
+48   p4_0.254      p4      0.2540                32.0              c   
+49  p4_0.3048      p4      0.3048                50.0              c   
+50  p4_0.3556      p4      0.3556                60.0              c   
+51  p4_0.4064      p4      0.4064                90.0              c   
+52  p4_0.4572      p4      0.4572               130.0              c   
+53   p4_0.508      p4      0.5080               170.0              c   
+54  p4_0.5588      p4      0.5588               300.0              c   
+55  p4_0.6096      p4      0.6096               550.0              c   
+56  p5_0.0254      p5      0.0254                 2.0              a   
+57  p5_0.0508      p5      0.0508                 5.0              a   
+58  p5_0.0762      p5      0.0762                 8.0              a   
+59  p5_0.1016      p5      0.1016                11.0              a   
+60  p5_0.1524      p5      0.1524                16.0              a   
+61  p5_0.2032      p5      0.2032                23.0              a   
+62   p5_0.254      p5      0.2540                32.0              a   
+63  p5_0.3048      p5      0.3048                50.0              a   
+64  p5_0.3556      p5      0.3556                60.0              a   
+65  p5_0.4064      p5      0.4064                90.0              a   
+66  p5_0.4572      p5      0.4572               130.0              a   
+67   p5_0.508      p5      0.5080               170.0              a   
+68  p5_0.5588      p5      0.5588               300.0              a   
+69  p5_0.6096      p5      0.6096               550.0              a   
+70  p6_0.0254      p6      0.0254                 2.0              b   
+71  p6_0.0508      p6      0.0508                 5.0              b   
+72  p6_0.0762      p6      0.0762                 8.0              b   
+73  p6_0.1016      p6      0.1016                11.0              b   
+74  p6_0.1524      p6      0.1524                16.0              b   
+75  p6_0.2032      p6      0.2032                23.0              b   
+76   p6_0.254      p6      0.2540                32.0              b   
+77  p6_0.3048      p6      0.3048                50.0              b   
+78  p6_0.3556      p6      0.3556                60.0              b   
+79  p6_0.4064      p6      0.4064                90.0              b   
+80  p6_0.4572      p6      0.4572               130.0              b   
+81   p6_0.508      p6      0.5080               170.0              b   
+82  p6_0.5588      p6      0.5588               300.0              b   
+83  p6_0.6096      p6      0.6096               550.0              b   
+
+   End_Junction  length_m   cost_USD  End_Junction_Elevation_m  static_head  \
+0             a    1000.0     2000.0                     250.0        300.0   
+1             a    1000.0     5000.0                     250.0        300.0   
+2             a    1000.0     8000.0                     250.0        300.0   
+3             a    1000.0    11000.0                     250.0        300.0   
+4             a    1000.0    16000.0                     250.0        300.0   
+5             a    1000.0    23000.0                     250.0        300.0   
+6             a    1000.0    32000.0                     250.0        300.0   
+7             a    1000.0    50000.0                     250.0        300.0   
+8             a    1000.0    60000.0                     250.0        300.0   
+9             a    1000.0    90000.0                     250.0        300.0   
+10            a    1000.0   130000.0                     250.0        300.0   
+11            a    1000.0   170000.0                     250.0        300.0   
+12            a    1000.0   300000.0                     250.0        300.0   
+13            a    1000.0   550000.0                     250.0        300.0   
+14            b     500.0     1000.0                     270.0        300.0   
+15            b     500.0     2500.0                     270.0        300.0   
+16            b     500.0     4000.0                     270.0        300.0   
+17            b     500.0     5500.0                     270.0        300.0   
+18            b     500.0     8000.0                     270.0        300.0   
+19            b     500.0    11500.0                     270.0        300.0   
+20            b     500.0    16000.0                     270.0        300.0   
+21            b     500.0    25000.0                     270.0        300.0   
+22            b     500.0    30000.0                     270.0        300.0   
+23            b     500.0    45000.0                     270.0        300.0   
+24            b     500.0    65000.0                     270.0        300.0   
+25            b     500.0    85000.0                     270.0        300.0   
+26            b     500.0   150000.0                     270.0        300.0   
+27            b     500.0   275000.0                     270.0        300.0   
+28            c     200.0      400.0                     250.0        300.0   
+29            c     200.0     1000.0                     250.0        300.0   
+30            c     200.0     1600.0                     250.0        300.0   
+31            c     200.0     2200.0                     250.0        300.0   
+32            c     200.0     3200.0                     250.0        300.0   
+33            c     200.0     4600.0                     250.0        300.0   
+34            c     200.0     6400.0                     250.0        300.0   
+35            c     200.0    10000.0                     250.0        300.0   
+36            c     200.0    12000.0                     250.0        300.0   
+37            c     200.0    18000.0                     250.0        300.0   
+38            c     200.0    26000.0                     250.0        300.0   
+39            c     200.0    34000.0                     250.0        300.0   
+40            c     200.0    60000.0                     250.0        300.0   
+41            c     200.0   110000.0                     250.0        300.0   
+42           v1     700.0     1400.0                     230.0        300.0   
+43           v1     700.0     3500.0                     230.0        300.0   
+44           v1     700.0     5600.0                     230.0        300.0   
+45           v1     700.0     7700.0                     230.0        300.0   
+46           v1     700.0    11200.0                     230.0        300.0   
+47           v1     700.0    16100.0                     230.0        300.0   
+48           v1     700.0    22400.0                     230.0        300.0   
+49           v1     700.0    35000.0                     230.0        300.0   
+50           v1     700.0    42000.0                     230.0        300.0   
+51           v1     700.0    63000.0                     230.0        300.0   
+52           v1     700.0    91000.0                     230.0        300.0   
+53           v1     700.0   119000.0                     230.0        300.0   
+54           v1     700.0   210000.0                     230.0        300.0   
+55           v1     700.0   385000.0                     230.0        300.0   
+56           v2     300.0      600.0                     230.0        300.0   
+57           v2     300.0     1500.0                     230.0        300.0   
+58           v2     300.0     2400.0                     230.0        300.0   
+59           v2     300.0     3300.0                     230.0        300.0   
+60           v2     300.0     4800.0                     230.0        300.0   
+61           v2     300.0     6900.0                     230.0        300.0   
+62           v2     300.0     9600.0                     230.0        300.0   
+63           v2     300.0    15000.0                     230.0        300.0   
+64           v2     300.0    18000.0                     230.0        300.0   
+65           v2     300.0    27000.0                     230.0        300.0   
+66           v2     300.0    39000.0                     230.0        300.0   
+67           v2     300.0    51000.0                     230.0        300.0   
+68           v2     300.0    90000.0                     230.0        300.0   
+69           v2     300.0   165000.0                     230.0        300.0   
+70           v3    2000.0     4000.0                     240.0        300.0   
+71           v3    2000.0    10000.0                     240.0        300.0   
+72           v3    2000.0    16000.0                     240.0        300.0   
+73           v3    2000.0    22000.0                     240.0        300.0   
+74           v3    2000.0    32000.0                     240.0        300.0   
+75           v3    2000.0    46000.0                     240.0        300.0   
+76           v3    2000.0    64000.0                     240.0        300.0   
+77           v3    2000.0   100000.0                     240.0        300.0   
+78           v3    2000.0   120000.0                     240.0        300.0   
+79           v3    2000.0   180000.0                     240.0        300.0   
+80           v3    2000.0   260000.0                     240.0        300.0   
+81           v3    2000.0   340000.0                     240.0        300.0   
+82           v3    2000.0   600000.0                     240.0        300.0   
+83           v3    2000.0  1100000.0                     240.0        300.0   
+
+    Flow_cms  flow_cmh    dz    hwc end_junc_path  hydraulic_gradient_per_m  \
+0   0.044444     160.0  50.0  140.0            p1                  0.050000   
+1   0.044444     160.0  50.0  140.0            p1                  0.050000   
+2   0.044444     160.0  50.0  140.0            p1                  0.050000   
+3   0.044444     160.0  50.0  140.0            p1                  0.050000   
+4   0.044444     160.0  50.0  140.0            p1                  0.050000   
+5   0.044444     160.0  50.0  140.0            p1                  0.050000   
+6   0.044444     160.0  50.0  140.0            p1                  0.050000   
+7   0.044444     160.0  50.0  140.0            p1                  0.050000   
+8   0.044444     160.0  50.0  140.0            p1                  0.050000   
+9   0.044444     160.0  50.0  140.0            p1                  0.050000   
+10  0.044444     160.0  50.0  140.0            p1                  0.050000   
+11  0.044444     160.0  50.0  140.0            p1                  0.050000   
+12  0.044444     160.0  50.0  140.0            p1                  0.050000   
+13  0.044444     160.0  50.0  140.0            p1                  0.050000   
+14  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+15  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+16  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+17  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+18  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+19  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+20  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+21  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+22  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+23  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+24  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+25  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+26  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+27  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+28  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+29  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+30  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+31  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+32  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+33  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+34  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+35  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+36  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+37  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+38  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+39  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+40  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+41  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+42  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+43  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+44  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+45  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+46  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+47  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+48  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+49  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+50  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+51  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+52  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+53  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+54  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+55  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+56  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+57  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+58  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+59  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+60  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+61  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+62  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+63  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+64  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+65  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+66  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+67  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+68  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+69  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+70  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+71  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+72  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+73  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+74  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+75  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+76  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+77  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+78  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+79  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+80  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+81  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+82  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+83  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+
+         headloss  headloss_per_m    lp_vars  Distance_from_Source_m  Results  
+0   208157.057639    2.081571e+02  p1_0.0254                  1000.0      0.0  
+1     7116.306575    7.116307e+00  p1_0.0508                  2000.0      0.0  
+2      987.688009    9.876880e-01  p1_0.0762                  3000.0      0.0  
+3      243.286583    2.432866e-01  p1_0.1016                  4000.0      0.0  
+4       33.766286    3.376629e-02  p1_0.1524                  5000.0      0.0  
+5        8.317287    8.317287e-03  p1_0.2032                  6000.0      1.0  
+6        2.805376    2.805376e-03   p1_0.254                  7000.0      0.0  
+7        1.154375    1.154375e-03  p1_0.3048                  8000.0      0.0  
+8        0.544865    5.448653e-04  p1_0.3556                  9000.0      0.0  
+9        0.284345    2.843447e-04  p1_0.4064                 10000.0      0.0  
+10       0.160218    1.602182e-04  p1_0.4572                 11000.0      0.0  
+11       0.095908    9.590796e-05   p1_0.508                 12000.0      0.0  
+12       0.060291    6.029145e-05  p1_0.5588                 13000.0      0.0  
+13       0.039465    3.946484e-05  p1_0.6096                 14000.0      0.0  
+14   92353.200095    1.847064e+02  p2_0.0254                 14500.0      0.0  
+15    3157.297151    6.314594e+00  p2_0.0508                 15000.0      0.0  
+16     438.208290    8.764166e-01  p2_0.0762                 15500.0      0.0  
+17     107.939143    2.158783e-01  p2_0.1016                 16000.0      0.0  
+18      14.981114    2.996223e-02  p2_0.1524                 16500.0      1.0  
+19       3.690137    7.380274e-03  p2_0.2032                 17000.0      0.0  
+20       1.244663    2.489327e-03   p2_0.254                 17500.0      0.0  
+21       0.512162    1.024325e-03  p2_0.3048                 18000.0      0.0  
+22       0.241741    4.834816e-04  p2_0.3556                 18500.0      0.0  
+23       0.126155    2.523109e-04  p2_0.4064                 19000.0      0.0  
+24       0.071084    1.421683e-04  p2_0.4572                 19500.0      0.0  
+25       0.042552    8.510311e-05   p2_0.508                 20000.0      0.0  
+26       0.026750    5.349911e-05  p2_0.5588                 20500.0      0.0  
+27       0.017509    3.501879e-05  p2_0.6096                 21000.0      0.0  
+28    4829.291007    2.414646e+01  p3_0.0254                 21200.0      0.0  
+29     165.099929    8.254996e-01  p3_0.0508                 21400.0      0.0  
+30      22.914586    1.145729e-01  p3_0.0762                 21600.0      1.0  
+31       5.644304    2.822152e-02  p3_0.1016                 21800.0      0.0  
+32       0.783385    3.916927e-03  p3_0.1524                 22000.0      0.0  
+33       0.192963    9.648147e-04  p3_0.2032                 22200.0      0.0  
+34       0.065085    3.254268e-04   p3_0.254                 22400.0      0.0  
+35       0.026782    1.339088e-04  p3_0.3048                 22600.0      0.0  
+36       0.012641    6.320499e-05  p3_0.3556                 22800.0      0.0  
+37       0.006597    3.298431e-05  p3_0.4064                 23000.0      0.0  
+38       0.003717    1.858550e-05  p3_0.4572                 23200.0      0.0  
+39       0.002225    1.112543e-05   p3_0.508                 23400.0      0.0  
+40       0.001399    6.993876e-06  p3_0.5588                 23600.0      0.0  
+41       0.000916    4.577966e-06  p3_0.6096                 23800.0      0.0  
+42   16902.518523    2.414646e+01  p4_0.0254                 24500.0      0.0  
+43     577.849750    8.254996e-01  p4_0.0508                 25200.0      0.0  
+44      80.201051    1.145729e-01  p4_0.0762                 25900.0      0.0  
+45      19.755064    2.822152e-02  p4_0.1016                 26600.0      1.0  
+46       2.741849    3.916927e-03  p4_0.1524                 27300.0      0.0  
+47       0.675370    9.648147e-04  p4_0.2032                 28000.0      0.0  
+48       0.227799    3.254268e-04   p4_0.254                 28700.0      0.0  
+49       0.093736    1.339088e-04  p4_0.3048                 29400.0      0.0  
+50       0.044243    6.320499e-05  p4_0.3556                 30100.0      0.0  
+51       0.023089    3.298431e-05  p4_0.4064                 30800.0      0.0  
+52       0.013010    1.858550e-05  p4_0.4572                 31500.0      0.0  
+53       0.007788    1.112543e-05   p4_0.508                 32200.0      0.0  
+54       0.004896    6.993876e-06  p4_0.5588                 32900.0      0.0  
+55       0.003205    4.577966e-06  p4_0.6096                 33600.0      0.0  
+56     367.690312    1.225634e+00  p5_0.0254                 14300.0      0.0  
+57      12.570302    4.190101e-02  p5_0.0508                 14600.0      1.0  
+58       1.744660    5.815534e-03  p5_0.0762                 14900.0      0.0  
+59       0.429743    1.432478e-03  p5_0.1016                 15200.0      0.0  
+60       0.059645    1.988168e-04  p5_0.1524                 15500.0      0.0  
+61       0.014692    4.897241e-05  p5_0.2032                 15800.0      0.0  
+62       0.004955    1.651813e-05   p5_0.254                 16100.0      0.0  
+63       0.002039    6.796989e-06  p5_0.3048                 16400.0      0.0  
+64       0.000962    3.208182e-06  p5_0.3556                 16700.0      0.0  
+65       0.000502    1.674229e-06  p5_0.4064                 17000.0      0.0  
+66       0.000283    9.433693e-07  p5_0.4572                 17300.0      0.0  
+67       0.000169    5.647087e-07   p5_0.508                 17600.0      0.0  
+68       0.000106    3.549977e-07  p5_0.5588                 17900.0      0.0  
+69       0.000070    2.323700e-07  p5_0.6096                 18200.0      0.0  
+70  174337.545865    8.716877e+01  p6_0.0254                 23000.0      0.0  
+71    5960.112225    2.980056e+00  p6_0.0508                 25000.0      0.0  
+72     827.217225    4.136086e-01  p6_0.0762                 27000.0      0.0  
+73     203.759538    1.018798e-01  p6_0.1016                 29000.0      0.0  
+74      28.280239    1.414012e-02  p6_0.1524                 31000.0      1.0  
+75       6.965968    3.482984e-03  p6_0.2032                 33000.0      0.0  
+76       2.349584    1.174792e-03   p6_0.254                 35000.0      0.0  
+77       0.966822    4.834111e-04  p6_0.3048                 37000.0      0.0  
+78       0.456340    2.281702e-04  p6_0.3556                 39000.0      0.0  
+79       0.238147    1.190735e-04  p6_0.4064                 41000.0      0.0  
+80       0.134187    6.709370e-05  p6_0.4572                 43000.0      0.0  
+81       0.080326    4.016284e-05   p6_0.508                 45000.0      0.0  
+82       0.050496    2.524791e-05  p6_0.5588                 47000.0      0.0  
+83       0.033053    1.652647e-05  p6_0.6096                 49000.0      0.0  
+
+total_cost_of_operation: 73800.0
+branches_end: [&#39;p1,p2,p3,p4&#39;, &#39;p1,p5&#39;, &#39;p1,p2,p6&#39;]
+results_branch: {&#39;p1,p2,p3,p4&#39;:     var_name Pipe_ID  Diameter_m  cost_USD_per_meter Start_Junction  \
+0  p1_0.2032      p1      0.2032                23.0         source   
+1  p2_0.1524      p2      0.1524                16.0              a   
+2  p3_0.0762      p3      0.0762                 8.0              b   
+3  p4_0.1016      p4      0.1016                11.0              c   
+
+  End_Junction  length_m  cost_USD  End_Junction_Elevation_m  static_head  \
+0            a    1000.0   23000.0                     250.0        300.0   
+1            b     500.0    8000.0                     270.0        300.0   
+2            c     200.0    1600.0                     250.0        300.0   
+3           v1     700.0    7700.0                     230.0        300.0   
+
+   Flow_cms  flow_cmh    dz    hwc end_junc_path  hydraulic_gradient_per_m  \
+0  0.044444     160.0  50.0  140.0            p1                      0.05   
+1  0.041667     150.0  30.0  140.0         p1,p2                      0.06   
+2  0.013889      50.0  50.0  140.0      p1,p2,p3                      0.25   
+3  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                      0.10   
+
+    headloss  headloss_per_m    lp_vars  Distance_from_Source_m  Results  \
+0   8.317287        0.008317  p1_0.2032                     1.0      1.0   
+1  14.981114        0.029962  p2_0.1524                     2.0      1.0   
+2  22.914586        0.114573  p3_0.0762                     3.0      1.0   
+3  19.755064        0.028222  p4_0.1016                     4.0      1.0   
+
+   Total_Head_m  Pressure_Head_m  branch_end pipe_updated  flow_cms  \
+0    291.682713        41.682713           0           p1  0.044444   
+1    276.701600         6.701600           0           p2  0.041667   
+2    253.787014         3.787014           0           p3  0.013889   
+3    234.031950         4.031950           0           p4  0.013889   
+
+   Velocity_m_s  Diameter_mm  sort_index  
+0      1.370504     0.000203         1.0  
+1      2.284173     0.000152         2.0  
+2      3.045564     0.000076         3.0  
+3      1.713130     0.000102         4.0  , &#39;p1,p5&#39;:     var_name Pipe_ID  Diameter_m  cost_USD_per_meter Start_Junction  \
+0  p1_0.2032      p1      0.2032                23.0         source   
+4  p5_0.0508      p5      0.0508                 5.0              a   
+
+  End_Junction  length_m  cost_USD  End_Junction_Elevation_m  static_head  \
+0            a    1000.0   23000.0                     250.0        300.0   
+4           v2     300.0    1500.0                     230.0        300.0   
+
+   Flow_cms  flow_cmh    dz    hwc end_junc_path  hydraulic_gradient_per_m  \
+0  0.044444     160.0  50.0  140.0            p1                  0.050000   
+4  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+
+    headloss  headloss_per_m    lp_vars  Distance_from_Source_m  Results  \
+0   8.317287        0.008317  p1_0.2032                     1.0      1.0   
+4  12.570302        0.041901  p5_0.0508                     2.0      1.0   
+
+   Total_Head_m  Pressure_Head_m  branch_end pipe_updated  flow_cms  \
+0    291.682713        41.682713           0           p1  0.044444   
+4    279.112412        49.112412           0           p5  0.002778   
+
+   Velocity_m_s  Diameter_mm  sort_index  
+0      1.370504     0.000203         1.0  
+4      1.370504     0.000051         2.0  , &#39;p1,p2,p6&#39;:     var_name Pipe_ID  Diameter_m  cost_USD_per_meter Start_Junction  \
+0  p1_0.2032      p1      0.2032                23.0         source   
+1  p2_0.1524      p2      0.1524                16.0              a   
+5  p6_0.1524      p6      0.1524                16.0              b   
+
+  End_Junction  length_m  cost_USD  End_Junction_Elevation_m  static_head  \
+0            a    1000.0   23000.0                     250.0        300.0   
+1            b     500.0    8000.0                     270.0        300.0   
+5           v3    2000.0   32000.0                     240.0        300.0   
+
+   Flow_cms  flow_cmh    dz    hwc end_junc_path  hydraulic_gradient_per_m  \
+0  0.044444     160.0  50.0  140.0            p1                      0.05   
+1  0.041667     150.0  30.0  140.0         p1,p2                      0.06   
+5  0.027778     100.0  60.0  140.0      p1,p2,p6                      0.03   
+
+    headloss  headloss_per_m    lp_vars  Distance_from_Source_m  Results  \
+0   8.317287        0.008317  p1_0.2032                     1.0      1.0   
+1  14.981114        0.029962  p2_0.1524                     2.0      1.0   
+5  28.280239        0.014140  p6_0.1524                     3.0      1.0   
+
+   Total_Head_m  Pressure_Head_m  branch_end pipe_updated  flow_cms  \
+0    291.682713        41.682713           0           p1  0.044444   
+1    276.701600         6.701600           0           p2  0.041667   
+5    248.421361         8.421361           0           p6  0.027778   
+
+   Velocity_m_s  Diameter_mm  sort_index  
+0      1.370504     0.000203         1.0  
+1      2.284173     0.000152         2.0  
+5      1.522782     0.000152         3.0  }
+df_res:
+    var_name Pipe_ID  Diameter_m  cost_USD_per_meter Start_Junction  \
+0  p1_0.2032      p1      0.2032                23.0         source   
+1  p2_0.1524      p2      0.1524                16.0              a   
+2  p3_0.0762      p3      0.0762                 8.0              b   
+3  p4_0.1016      p4      0.1016                11.0              c   
+4  p5_0.0508      p5      0.0508                 5.0              a   
+5  p6_0.1524      p6      0.1524                16.0              b   
+
+  End_Junction  length_m  cost_USD  End_Junction_Elevation_m  static_head  \
+0            a    1000.0   23000.0                     250.0        300.0   
+1            b     500.0    8000.0                     270.0        300.0   
+2            c     200.0    1600.0                     250.0        300.0   
+3           v1     700.0    7700.0                     230.0        300.0   
+4           v2     300.0    1500.0                     230.0        300.0   
+5           v3    2000.0   32000.0                     240.0        300.0   
+
+   Flow_cms  flow_cmh    dz    hwc end_junc_path  hydraulic_gradient_per_m  \
+0  0.044444     160.0  50.0  140.0            p1                  0.050000   
+1  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+2  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+3  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+4  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+5  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+
+    headloss  headloss_per_m    lp_vars  Distance_from_Source_m  Results  \
+0   8.317287        0.008317  p1_0.2032                     1.0      1.0   
+1  14.981114        0.029962  p2_0.1524                     2.0      1.0   
+2  22.914586        0.114573  p3_0.0762                     3.0      1.0   
+3  19.755064        0.028222  p4_0.1016                     4.0      1.0   
+4  12.570302        0.041901  p5_0.0508                     2.0      1.0   
+5  28.280239        0.014140  p6_0.1524                     3.0      1.0   
+
+   Total_Head_m  Pressure_Head_m  branch_end pipe_updated  flow_cms  \
+0    291.682713        41.682713           0           p1  0.044444   
+1    276.701600         6.701600           0           p2  0.041667   
+2    253.787014         3.787014           0           p3  0.013889   
+3    234.031950         4.031950           0           p4  0.013889   
+4    279.112412        49.112412           0           p5  0.002778   
+5    248.421361         8.421361           0           p6  0.027778   
+
+   Velocity_m_s  Diameter_mm  
+0      1.370504     0.000203  
+1      2.284173     0.000152  
+2      3.045564     0.000076  
+3      1.713130     0.000102  
+4      1.370504     0.000051  
+5      1.522782     0.000152  
+
+pipes_summery:
+  Pipe_ID  Diameter_mm  Velocity_m_s  length_m  flow_cmh   headloss
+0      p1     0.000203      1.370504    1000.0     160.0   8.317287
+1      p2     0.000152      2.284173     500.0     150.0  14.981114
+2      p3     0.000076      3.045564     200.0      50.0  22.914586
+3      p4     0.000102      1.713130     700.0      50.0  19.755064
+4      p5     0.000051      1.370504     300.0      10.0  12.570302
+5      p6     0.000152      1.522782    2000.0     100.0  28.280239
+
+=== 3  ===
+========Plot Branch:  p1,p2,p3,p4 ========
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>========Plot Branch:  p1,p5 ========
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>========Plot Branch:  p1,p2,p6 ========
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== 4  ===
+Writing debug information to debug_model.txt
+Debug information written to debug_model.txt
+=== OPTIMIZATION RESULTS ===
+Optimal
+
+The available keys in results are:
+dict_keys([&#39;slack&#39;, &#39;debug&#39;, &#39;CONSTRAINT VIOLATION&#39;, &#39;model&#39;, &#39;status&#39;, &#39;df_model&#39;, &#39;total_cost_of_operation&#39;, &#39;branches_end&#39;, &#39;results_branch&#39;, &#39;df_res&#39;, &#39;pipes_summery&#39;])
+========Plot Branch:  p1_0,p1_1,p2_0,p3_0,p4_0,p4_1 ========
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>========Plot Branch:  p1_0,p1_1,p5_0,p5_1 ========
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>========Plot Branch:  p1_0,p1_1,p2_0,p6_0,p6_1 ========
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== 5  ===
+slack: {&#39;pressure_path_p1&#39;: 34.981114, &#39;pressure_path_p1,p2&#39;: -0.0, &#39;pressure_path_p1,p2,p3&#39;: 14.355696000000002, &#39;pressure_path_p1,p2,p3,p4&#39;: -0.0, &#39;pressure_path_p1,p5&#39;: -0.0, &#39;pressure_path_p1,p2,p6&#39;: -0.0}
+debug: debug_model.txt
+CONSTRAINT VIOLATION: {None: np.float64(2.599999993435631e-05)}
+model: economic_diameter:
+MINIMIZE
+2.0*p1_0.0254 + 5.0*p1_0.0508 + 8.0*p1_0.0762 + 11.0*p1_0.1016 + 16.0*p1_0.1524 + 23.0*p1_0.2032 + 32.0*p1_0.254 + 50.0*p1_0.3048 + 60.0*p1_0.3556 + 90.0*p1_0.4064 + 130.0*p1_0.4572 + 170.0*p1_0.508 + 300.0*p1_0.5588 + 550.0*p1_0.6096 + 2.0*p2_0.0254 + 5.0*p2_0.0508 + 8.0*p2_0.0762 + 11.0*p2_0.1016 + 16.0*p2_0.1524 + 23.0*p2_0.2032 + 32.0*p2_0.254 + 50.0*p2_0.3048 + 60.0*p2_0.3556 + 90.0*p2_0.4064 + 130.0*p2_0.4572 + 170.0*p2_0.508 + 300.0*p2_0.5588 + 550.0*p2_0.6096 + 2.0*p3_0.0254 + 5.0*p3_0.0508 + 8.0*p3_0.0762 + 11.0*p3_0.1016 + 16.0*p3_0.1524 + 23.0*p3_0.2032 + 32.0*p3_0.254 + 50.0*p3_0.3048 + 60.0*p3_0.3556 + 90.0*p3_0.4064 + 130.0*p3_0.4572 + 170.0*p3_0.508 + 300.0*p3_0.5588 + 550.0*p3_0.6096 + 2.0*p4_0.0254 + 5.0*p4_0.0508 + 8.0*p4_0.0762 + 11.0*p4_0.1016 + 16.0*p4_0.1524 + 23.0*p4_0.2032 + 32.0*p4_0.254 + 50.0*p4_0.3048 + 60.0*p4_0.3556 + 90.0*p4_0.4064 + 130.0*p4_0.4572 + 170.0*p4_0.508 + 300.0*p4_0.5588 + 550.0*p4_0.6096 + 2.0*p5_0.0254 + 5.0*p5_0.0508 + 8.0*p5_0.0762 + 11.0*p5_0.1016 + 16.0*p5_0.1524 + 23.0*p5_0.2032 + 32.0*p5_0.254 + 50.0*p5_0.3048 + 60.0*p5_0.3556 + 90.0*p5_0.4064 + 130.0*p5_0.4572 + 170.0*p5_0.508 + 300.0*p5_0.5588 + 550.0*p5_0.6096 + 2.0*p6_0.0254 + 5.0*p6_0.0508 + 8.0*p6_0.0762 + 11.0*p6_0.1016 + 16.0*p6_0.1524 + 23.0*p6_0.2032 + 32.0*p6_0.254 + 50.0*p6_0.3048 + 60.0*p6_0.3556 + 90.0*p6_0.4064 + 130.0*p6_0.4572 + 170.0*p6_0.508 + 300.0*p6_0.5588 + 550.0*p6_0.6096 + 0.0
+SUBJECT TO
+_C1: p1_0.0254 + p1_0.0508 + p1_0.0762 + p1_0.1016 + p1_0.1524 + p1_0.2032
+ + p1_0.254 + p1_0.3048 + p1_0.3556 + p1_0.4064 + p1_0.4572 + p1_0.508
+ + p1_0.5588 + p1_0.6096 = 1000
+
+_C2: p2_0.0254 + p2_0.0508 + p2_0.0762 + p2_0.1016 + p2_0.1524 + p2_0.2032
+ + p2_0.254 + p2_0.3048 + p2_0.3556 + p2_0.4064 + p2_0.4572 + p2_0.508
+ + p2_0.5588 + p2_0.6096 = 500
+
+_C3: p3_0.0254 + p3_0.0508 + p3_0.0762 + p3_0.1016 + p3_0.1524 + p3_0.2032
+ + p3_0.254 + p3_0.3048 + p3_0.3556 + p3_0.4064 + p3_0.4572 + p3_0.508
+ + p3_0.5588 + p3_0.6096 = 200
+
+_C4: p4_0.0254 + p4_0.0508 + p4_0.0762 + p4_0.1016 + p4_0.1524 + p4_0.2032
+ + p4_0.254 + p4_0.3048 + p4_0.3556 + p4_0.4064 + p4_0.4572 + p4_0.508
+ + p4_0.5588 + p4_0.6096 = 700
+
+_C5: p5_0.0254 + p5_0.0508 + p5_0.0762 + p5_0.1016 + p5_0.1524 + p5_0.2032
+ + p5_0.254 + p5_0.3048 + p5_0.3556 + p5_0.4064 + p5_0.4572 + p5_0.508
+ + p5_0.5588 + p5_0.6096 = 300
+
+_C6: p6_0.0254 + p6_0.0508 + p6_0.0762 + p6_0.1016 + p6_0.1524 + p6_0.2032
+ + p6_0.254 + p6_0.3048 + p6_0.3556 + p6_0.4064 + p6_0.4572 + p6_0.508
+ + p6_0.5588 + p6_0.6096 = 2000
+
+pressure_path_p1: 208.157057639 p1_0.0254 + 7.11630657503 p1_0.0508
+ + 0.987688009304 p1_0.0762 + 0.24328658295 p1_0.1016
+ + 0.0337662856808 p1_0.1524 + 0.00831728661764 p1_0.2032
+ + 0.00280537640761 p1_0.254 + 0.00115437469923 p1_0.3048
+ + 0.000544865306115 p1_0.3556 + 0.000284344725636 p1_0.4064
+ + 0.000160218230715 p1_0.4572 + 9.59079591218e-05 p1_0.508
+ + 6.0291448195e-05 p1_0.5588 + 3.94648365776e-05 p1_0.6096 &lt;= 47
+
+pressure_path_p1,p2: 208.157057639 p1_0.0254 + 7.11630657503 p1_0.0508
+ + 0.987688009304 p1_0.0762 + 0.24328658295 p1_0.1016
+ + 0.0337662856808 p1_0.1524 + 0.00831728661764 p1_0.2032
+ + 0.00280537640761 p1_0.254 + 0.00115437469923 p1_0.3048
+ + 0.000544865306115 p1_0.3556 + 0.000284344725636 p1_0.4064
+ + 0.000160218230715 p1_0.4572 + 9.59079591218e-05 p1_0.508
+ + 6.0291448195e-05 p1_0.5588 + 3.94648365776e-05 p1_0.6096
+ + 184.706400191 p2_0.0254 + 6.3145943022 p2_0.0508 + 0.876416580728 p2_0.0762
+ + 0.215878286622 p2_0.1016 + 0.029962227304 p2_0.1524
+ + 0.00738027376024 p2_0.2032 + 0.0024893269693 p2_0.254
+ + 0.00102432460175 p2_0.3048 + 0.000483481609622 p2_0.3556
+ + 0.000252310881415 p2_0.4064 + 0.000142168288579 p2_0.4572
+ + 8.51031143502e-05 p2_0.508 + 5.34991053617e-05 p2_0.5588
+ + 3.50187881259e-05 p2_0.6096 &lt;= 27
+
+pressure_path_p1,p2,p3: 208.157057639 p1_0.0254 + 7.11630657503 p1_0.0508
+ + 0.987688009304 p1_0.0762 + 0.24328658295 p1_0.1016
+ + 0.0337662856808 p1_0.1524 + 0.00831728661764 p1_0.2032
+ + 0.00280537640761 p1_0.254 + 0.00115437469923 p1_0.3048
+ + 0.000544865306115 p1_0.3556 + 0.000284344725636 p1_0.4064
+ + 0.000160218230715 p1_0.4572 + 9.59079591218e-05 p1_0.508
+ + 6.0291448195e-05 p1_0.5588 + 3.94648365776e-05 p1_0.6096
+ + 184.706400191 p2_0.0254 + 6.3145943022 p2_0.0508 + 0.876416580728 p2_0.0762
+ + 0.215878286622 p2_0.1016 + 0.029962227304 p2_0.1524
+ + 0.00738027376024 p2_0.2032 + 0.0024893269693 p2_0.254
+ + 0.00102432460175 p2_0.3048 + 0.000483481609622 p2_0.3556
+ + 0.000252310881415 p2_0.4064 + 0.000142168288579 p2_0.4572
+ + 8.51031143502e-05 p2_0.508 + 5.34991053617e-05 p2_0.5588
+ + 3.50187881259e-05 p2_0.6096 + 24.1464550332 p3_0.0254
+ + 0.82549964275 p3_0.0508 + 0.114572930527 p3_0.0762
+ + 0.0282215198564 p3_0.1016 + 0.00391692747812 p3_0.1524
+ + 0.000964814691317 p3_0.2032 + 0.000325426848583 p3_0.254
+ + 0.000133908775819 p3_0.3048 + 6.32049941641e-05 p3_0.3556
+ + 3.29843110265e-05 p3_0.4064 + 1.8585496679e-05 p3_0.4572
+ + 1.11254321546e-05 p3_0.508 + 6.99387644716e-06 p3_0.5588
+ + 4.57796585244e-06 p3_0.6096 &lt;= 47
+
+pressure_path_p1,p2,p3,p4: 208.157057639 p1_0.0254 + 7.11630657503 p1_0.0508
+ + 0.987688009304 p1_0.0762 + 0.24328658295 p1_0.1016
+ + 0.0337662856808 p1_0.1524 + 0.00831728661764 p1_0.2032
+ + 0.00280537640761 p1_0.254 + 0.00115437469923 p1_0.3048
+ + 0.000544865306115 p1_0.3556 + 0.000284344725636 p1_0.4064
+ + 0.000160218230715 p1_0.4572 + 9.59079591218e-05 p1_0.508
+ + 6.0291448195e-05 p1_0.5588 + 3.94648365776e-05 p1_0.6096
+ + 184.706400191 p2_0.0254 + 6.3145943022 p2_0.0508 + 0.876416580728 p2_0.0762
+ + 0.215878286622 p2_0.1016 + 0.029962227304 p2_0.1524
+ + 0.00738027376024 p2_0.2032 + 0.0024893269693 p2_0.254
+ + 0.00102432460175 p2_0.3048 + 0.000483481609622 p2_0.3556
+ + 0.000252310881415 p2_0.4064 + 0.000142168288579 p2_0.4572
+ + 8.51031143502e-05 p2_0.508 + 5.34991053617e-05 p2_0.5588
+ + 3.50187881259e-05 p2_0.6096 + 24.1464550332 p3_0.0254
+ + 0.82549964275 p3_0.0508 + 0.114572930527 p3_0.0762
+ + 0.0282215198564 p3_0.1016 + 0.00391692747812 p3_0.1524
+ + 0.000964814691317 p3_0.2032 + 0.000325426848583 p3_0.254
+ + 0.000133908775819 p3_0.3048 + 6.32049941641e-05 p3_0.3556
+ + 3.29843110265e-05 p3_0.4064 + 1.8585496679e-05 p3_0.4572
+ + 1.11254321546e-05 p3_0.508 + 6.99387644716e-06 p3_0.5588
+ + 4.57796585244e-06 p3_0.6096 + 24.1464550332 p4_0.0254
+ + 0.82549964275 p4_0.0508 + 0.114572930527 p4_0.0762
+ + 0.0282215198564 p4_0.1016 + 0.00391692747812 p4_0.1524
+ + 0.000964814691317 p4_0.2032 + 0.000325426848583 p4_0.254
+ + 0.000133908775819 p4_0.3048 + 6.32049941641e-05 p4_0.3556
+ + 3.29843110265e-05 p4_0.4064 + 1.8585496679e-05 p4_0.4572
+ + 1.11254321546e-05 p4_0.508 + 6.99387644716e-06 p4_0.5588
+ + 4.57796585244e-06 p4_0.6096 &lt;= 67
+
+pressure_path_p1,p5: 208.157057639 p1_0.0254 + 7.11630657503 p1_0.0508
+ + 0.987688009304 p1_0.0762 + 0.24328658295 p1_0.1016
+ + 0.0337662856808 p1_0.1524 + 0.00831728661764 p1_0.2032
+ + 0.00280537640761 p1_0.254 + 0.00115437469923 p1_0.3048
+ + 0.000544865306115 p1_0.3556 + 0.000284344725636 p1_0.4064
+ + 0.000160218230715 p1_0.4572 + 9.59079591218e-05 p1_0.508
+ + 6.0291448195e-05 p1_0.5588 + 3.94648365776e-05 p1_0.6096
+ + 1.22563437363 p5_0.0254 + 0.0419010051862 p5_0.0508
+ + 0.00581553365694 p5_0.0762 + 0.00143247796683 p5_0.1016
+ + 0.000198816801456 p5_0.1524 + 4.89724080921e-05 p5_0.2032
+ + 1.65181320064e-05 p5_0.254 + 6.79698938618e-06 p5_0.3048
+ + 3.20818162857e-06 p5_0.3556 + 1.67422941914e-06 p5_0.4064
+ + 9.43369266812e-07 p5_0.4572 + 5.64708651909e-07 p5_0.508
+ + 3.54997674266e-07 p5_0.5588 + 2.32370022943e-07 p5_0.6096 &lt;= 67
+
+pressure_path_p1,p2,p6: 208.157057639 p1_0.0254 + 7.11630657503 p1_0.0508
+ + 0.987688009304 p1_0.0762 + 0.24328658295 p1_0.1016
+ + 0.0337662856808 p1_0.1524 + 0.00831728661764 p1_0.2032
+ + 0.00280537640761 p1_0.254 + 0.00115437469923 p1_0.3048
+ + 0.000544865306115 p1_0.3556 + 0.000284344725636 p1_0.4064
+ + 0.000160218230715 p1_0.4572 + 9.59079591218e-05 p1_0.508
+ + 6.0291448195e-05 p1_0.5588 + 3.94648365776e-05 p1_0.6096
+ + 184.706400191 p2_0.0254 + 6.3145943022 p2_0.0508 + 0.876416580728 p2_0.0762
+ + 0.215878286622 p2_0.1016 + 0.029962227304 p2_0.1524
+ + 0.00738027376024 p2_0.2032 + 0.0024893269693 p2_0.254
+ + 0.00102432460175 p2_0.3048 + 0.000483481609622 p2_0.3556
+ + 0.000252310881415 p2_0.4064 + 0.000142168288579 p2_0.4572
+ + 8.51031143502e-05 p2_0.508 + 5.34991053617e-05 p2_0.5588
+ + 3.50187881259e-05 p2_0.6096 + 87.1687729325 p6_0.0254
+ + 2.98005611241 p6_0.0508 + 0.413608612592 p6_0.0762
+ + 0.101879768802 p6_0.1016 + 0.0141401195937 p6_0.1524
+ + 0.00348298384312 p6_0.2032 + 0.00117479187033 p6_0.254
+ + 0.000483411070361 p6_0.3048 + 0.00022817021285 p6_0.3556
+ + 0.000119073458785 p6_0.4064 + 6.70936970922e-05 p6_0.4572
+ + 4.01628424515e-05 p6_0.508 + 2.52479143254e-05 p6_0.5588
+ + 1.65264700485e-05 p6_0.6096 &lt;= 57
+
+VARIABLES
+p1_0.0254 &lt;= 1000 Continuous
+p1_0.0508 &lt;= 1000 Continuous
+p1_0.0762 &lt;= 1000 Continuous
+p1_0.1016 &lt;= 1000 Continuous
+p1_0.1524 &lt;= 1000 Continuous
+p1_0.2032 &lt;= 1000 Continuous
+p1_0.254 &lt;= 1000 Continuous
+p1_0.3048 &lt;= 1000 Continuous
+p1_0.3556 &lt;= 1000 Continuous
+p1_0.4064 &lt;= 1000 Continuous
+p1_0.4572 &lt;= 1000 Continuous
+p1_0.508 &lt;= 1000 Continuous
+p1_0.5588 &lt;= 1000 Continuous
+p1_0.6096 &lt;= 1000 Continuous
+p2_0.0254 &lt;= 500 Continuous
+p2_0.0508 &lt;= 500 Continuous
+p2_0.0762 &lt;= 500 Continuous
+p2_0.1016 &lt;= 500 Continuous
+p2_0.1524 &lt;= 500 Continuous
+p2_0.2032 &lt;= 500 Continuous
+p2_0.254 &lt;= 500 Continuous
+p2_0.3048 &lt;= 500 Continuous
+p2_0.3556 &lt;= 500 Continuous
+p2_0.4064 &lt;= 500 Continuous
+p2_0.4572 &lt;= 500 Continuous
+p2_0.508 &lt;= 500 Continuous
+p2_0.5588 &lt;= 500 Continuous
+p2_0.6096 &lt;= 500 Continuous
+p3_0.0254 &lt;= 200 Continuous
+p3_0.0508 &lt;= 200 Continuous
+p3_0.0762 &lt;= 200 Continuous
+p3_0.1016 &lt;= 200 Continuous
+p3_0.1524 &lt;= 200 Continuous
+p3_0.2032 &lt;= 200 Continuous
+p3_0.254 &lt;= 200 Continuous
+p3_0.3048 &lt;= 200 Continuous
+p3_0.3556 &lt;= 200 Continuous
+p3_0.4064 &lt;= 200 Continuous
+p3_0.4572 &lt;= 200 Continuous
+p3_0.508 &lt;= 200 Continuous
+p3_0.5588 &lt;= 200 Continuous
+p3_0.6096 &lt;= 200 Continuous
+p4_0.0254 &lt;= 700 Continuous
+p4_0.0508 &lt;= 700 Continuous
+p4_0.0762 &lt;= 700 Continuous
+p4_0.1016 &lt;= 700 Continuous
+p4_0.1524 &lt;= 700 Continuous
+p4_0.2032 &lt;= 700 Continuous
+p4_0.254 &lt;= 700 Continuous
+p4_0.3048 &lt;= 700 Continuous
+p4_0.3556 &lt;= 700 Continuous
+p4_0.4064 &lt;= 700 Continuous
+p4_0.4572 &lt;= 700 Continuous
+p4_0.508 &lt;= 700 Continuous
+p4_0.5588 &lt;= 700 Continuous
+p4_0.6096 &lt;= 700 Continuous
+p5_0.0254 &lt;= 300 Continuous
+p5_0.0508 &lt;= 300 Continuous
+p5_0.0762 &lt;= 300 Continuous
+p5_0.1016 &lt;= 300 Continuous
+p5_0.1524 &lt;= 300 Continuous
+p5_0.2032 &lt;= 300 Continuous
+p5_0.254 &lt;= 300 Continuous
+p5_0.3048 &lt;= 300 Continuous
+p5_0.3556 &lt;= 300 Continuous
+p5_0.4064 &lt;= 300 Continuous
+p5_0.4572 &lt;= 300 Continuous
+p5_0.508 &lt;= 300 Continuous
+p5_0.5588 &lt;= 300 Continuous
+p5_0.6096 &lt;= 300 Continuous
+p6_0.0254 &lt;= 2000 Continuous
+p6_0.0508 &lt;= 2000 Continuous
+p6_0.0762 &lt;= 2000 Continuous
+p6_0.1016 &lt;= 2000 Continuous
+p6_0.1524 &lt;= 2000 Continuous
+p6_0.2032 &lt;= 2000 Continuous
+p6_0.254 &lt;= 2000 Continuous
+p6_0.3048 &lt;= 2000 Continuous
+p6_0.3556 &lt;= 2000 Continuous
+p6_0.4064 &lt;= 2000 Continuous
+p6_0.4572 &lt;= 2000 Continuous
+p6_0.508 &lt;= 2000 Continuous
+p6_0.5588 &lt;= 2000 Continuous
+p6_0.6096 &lt;= 2000 Continuous
+
+status: Optimal
+df_model:
+     var_name Pipe_ID  Diameter_m  cost_USD_per_meter Start_Junction  \
+0   p1_0.0254      p1      0.0254                 2.0         source   
+1   p1_0.0508      p1      0.0508                 5.0         source   
+2   p1_0.0762      p1      0.0762                 8.0         source   
+3   p1_0.1016      p1      0.1016                11.0         source   
+4   p1_0.1524      p1      0.1524                16.0         source   
+5   p1_0.2032      p1      0.2032                23.0         source   
+6    p1_0.254      p1      0.2540                32.0         source   
+7   p1_0.3048      p1      0.3048                50.0         source   
+8   p1_0.3556      p1      0.3556                60.0         source   
+9   p1_0.4064      p1      0.4064                90.0         source   
+10  p1_0.4572      p1      0.4572               130.0         source   
+11   p1_0.508      p1      0.5080               170.0         source   
+12  p1_0.5588      p1      0.5588               300.0         source   
+13  p1_0.6096      p1      0.6096               550.0         source   
+14  p2_0.0254      p2      0.0254                 2.0              a   
+15  p2_0.0508      p2      0.0508                 5.0              a   
+16  p2_0.0762      p2      0.0762                 8.0              a   
+17  p2_0.1016      p2      0.1016                11.0              a   
+18  p2_0.1524      p2      0.1524                16.0              a   
+19  p2_0.2032      p2      0.2032                23.0              a   
+20   p2_0.254      p2      0.2540                32.0              a   
+21  p2_0.3048      p2      0.3048                50.0              a   
+22  p2_0.3556      p2      0.3556                60.0              a   
+23  p2_0.4064      p2      0.4064                90.0              a   
+24  p2_0.4572      p2      0.4572               130.0              a   
+25   p2_0.508      p2      0.5080               170.0              a   
+26  p2_0.5588      p2      0.5588               300.0              a   
+27  p2_0.6096      p2      0.6096               550.0              a   
+28  p3_0.0254      p3      0.0254                 2.0              b   
+29  p3_0.0508      p3      0.0508                 5.0              b   
+30  p3_0.0762      p3      0.0762                 8.0              b   
+31  p3_0.1016      p3      0.1016                11.0              b   
+32  p3_0.1524      p3      0.1524                16.0              b   
+33  p3_0.2032      p3      0.2032                23.0              b   
+34   p3_0.254      p3      0.2540                32.0              b   
+35  p3_0.3048      p3      0.3048                50.0              b   
+36  p3_0.3556      p3      0.3556                60.0              b   
+37  p3_0.4064      p3      0.4064                90.0              b   
+38  p3_0.4572      p3      0.4572               130.0              b   
+39   p3_0.508      p3      0.5080               170.0              b   
+40  p3_0.5588      p3      0.5588               300.0              b   
+41  p3_0.6096      p3      0.6096               550.0              b   
+42  p4_0.0254      p4      0.0254                 2.0              c   
+43  p4_0.0508      p4      0.0508                 5.0              c   
+44  p4_0.0762      p4      0.0762                 8.0              c   
+45  p4_0.1016      p4      0.1016                11.0              c   
+46  p4_0.1524      p4      0.1524                16.0              c   
+47  p4_0.2032      p4      0.2032                23.0              c   
+48   p4_0.254      p4      0.2540                32.0              c   
+49  p4_0.3048      p4      0.3048                50.0              c   
+50  p4_0.3556      p4      0.3556                60.0              c   
+51  p4_0.4064      p4      0.4064                90.0              c   
+52  p4_0.4572      p4      0.4572               130.0              c   
+53   p4_0.508      p4      0.5080               170.0              c   
+54  p4_0.5588      p4      0.5588               300.0              c   
+55  p4_0.6096      p4      0.6096               550.0              c   
+56  p5_0.0254      p5      0.0254                 2.0              a   
+57  p5_0.0508      p5      0.0508                 5.0              a   
+58  p5_0.0762      p5      0.0762                 8.0              a   
+59  p5_0.1016      p5      0.1016                11.0              a   
+60  p5_0.1524      p5      0.1524                16.0              a   
+61  p5_0.2032      p5      0.2032                23.0              a   
+62   p5_0.254      p5      0.2540                32.0              a   
+63  p5_0.3048      p5      0.3048                50.0              a   
+64  p5_0.3556      p5      0.3556                60.0              a   
+65  p5_0.4064      p5      0.4064                90.0              a   
+66  p5_0.4572      p5      0.4572               130.0              a   
+67   p5_0.508      p5      0.5080               170.0              a   
+68  p5_0.5588      p5      0.5588               300.0              a   
+69  p5_0.6096      p5      0.6096               550.0              a   
+70  p6_0.0254      p6      0.0254                 2.0              b   
+71  p6_0.0508      p6      0.0508                 5.0              b   
+72  p6_0.0762      p6      0.0762                 8.0              b   
+73  p6_0.1016      p6      0.1016                11.0              b   
+74  p6_0.1524      p6      0.1524                16.0              b   
+75  p6_0.2032      p6      0.2032                23.0              b   
+76   p6_0.254      p6      0.2540                32.0              b   
+77  p6_0.3048      p6      0.3048                50.0              b   
+78  p6_0.3556      p6      0.3556                60.0              b   
+79  p6_0.4064      p6      0.4064                90.0              b   
+80  p6_0.4572      p6      0.4572               130.0              b   
+81   p6_0.508      p6      0.5080               170.0              b   
+82  p6_0.5588      p6      0.5588               300.0              b   
+83  p6_0.6096      p6      0.6096               550.0              b   
+
+   End_Junction  length_m   cost_USD  End_Junction_Elevation_m  static_head  \
+0             a    1000.0     2000.0                     250.0        300.0   
+1             a    1000.0     5000.0                     250.0        300.0   
+2             a    1000.0     8000.0                     250.0        300.0   
+3             a    1000.0    11000.0                     250.0        300.0   
+4             a    1000.0    16000.0                     250.0        300.0   
+5             a    1000.0    23000.0                     250.0        300.0   
+6             a    1000.0    32000.0                     250.0        300.0   
+7             a    1000.0    50000.0                     250.0        300.0   
+8             a    1000.0    60000.0                     250.0        300.0   
+9             a    1000.0    90000.0                     250.0        300.0   
+10            a    1000.0   130000.0                     250.0        300.0   
+11            a    1000.0   170000.0                     250.0        300.0   
+12            a    1000.0   300000.0                     250.0        300.0   
+13            a    1000.0   550000.0                     250.0        300.0   
+14            b     500.0     1000.0                     270.0        300.0   
+15            b     500.0     2500.0                     270.0        300.0   
+16            b     500.0     4000.0                     270.0        300.0   
+17            b     500.0     5500.0                     270.0        300.0   
+18            b     500.0     8000.0                     270.0        300.0   
+19            b     500.0    11500.0                     270.0        300.0   
+20            b     500.0    16000.0                     270.0        300.0   
+21            b     500.0    25000.0                     270.0        300.0   
+22            b     500.0    30000.0                     270.0        300.0   
+23            b     500.0    45000.0                     270.0        300.0   
+24            b     500.0    65000.0                     270.0        300.0   
+25            b     500.0    85000.0                     270.0        300.0   
+26            b     500.0   150000.0                     270.0        300.0   
+27            b     500.0   275000.0                     270.0        300.0   
+28            c     200.0      400.0                     250.0        300.0   
+29            c     200.0     1000.0                     250.0        300.0   
+30            c     200.0     1600.0                     250.0        300.0   
+31            c     200.0     2200.0                     250.0        300.0   
+32            c     200.0     3200.0                     250.0        300.0   
+33            c     200.0     4600.0                     250.0        300.0   
+34            c     200.0     6400.0                     250.0        300.0   
+35            c     200.0    10000.0                     250.0        300.0   
+36            c     200.0    12000.0                     250.0        300.0   
+37            c     200.0    18000.0                     250.0        300.0   
+38            c     200.0    26000.0                     250.0        300.0   
+39            c     200.0    34000.0                     250.0        300.0   
+40            c     200.0    60000.0                     250.0        300.0   
+41            c     200.0   110000.0                     250.0        300.0   
+42           v1     700.0     1400.0                     230.0        300.0   
+43           v1     700.0     3500.0                     230.0        300.0   
+44           v1     700.0     5600.0                     230.0        300.0   
+45           v1     700.0     7700.0                     230.0        300.0   
+46           v1     700.0    11200.0                     230.0        300.0   
+47           v1     700.0    16100.0                     230.0        300.0   
+48           v1     700.0    22400.0                     230.0        300.0   
+49           v1     700.0    35000.0                     230.0        300.0   
+50           v1     700.0    42000.0                     230.0        300.0   
+51           v1     700.0    63000.0                     230.0        300.0   
+52           v1     700.0    91000.0                     230.0        300.0   
+53           v1     700.0   119000.0                     230.0        300.0   
+54           v1     700.0   210000.0                     230.0        300.0   
+55           v1     700.0   385000.0                     230.0        300.0   
+56           v2     300.0      600.0                     230.0        300.0   
+57           v2     300.0     1500.0                     230.0        300.0   
+58           v2     300.0     2400.0                     230.0        300.0   
+59           v2     300.0     3300.0                     230.0        300.0   
+60           v2     300.0     4800.0                     230.0        300.0   
+61           v2     300.0     6900.0                     230.0        300.0   
+62           v2     300.0     9600.0                     230.0        300.0   
+63           v2     300.0    15000.0                     230.0        300.0   
+64           v2     300.0    18000.0                     230.0        300.0   
+65           v2     300.0    27000.0                     230.0        300.0   
+66           v2     300.0    39000.0                     230.0        300.0   
+67           v2     300.0    51000.0                     230.0        300.0   
+68           v2     300.0    90000.0                     230.0        300.0   
+69           v2     300.0   165000.0                     230.0        300.0   
+70           v3    2000.0     4000.0                     240.0        300.0   
+71           v3    2000.0    10000.0                     240.0        300.0   
+72           v3    2000.0    16000.0                     240.0        300.0   
+73           v3    2000.0    22000.0                     240.0        300.0   
+74           v3    2000.0    32000.0                     240.0        300.0   
+75           v3    2000.0    46000.0                     240.0        300.0   
+76           v3    2000.0    64000.0                     240.0        300.0   
+77           v3    2000.0   100000.0                     240.0        300.0   
+78           v3    2000.0   120000.0                     240.0        300.0   
+79           v3    2000.0   180000.0                     240.0        300.0   
+80           v3    2000.0   260000.0                     240.0        300.0   
+81           v3    2000.0   340000.0                     240.0        300.0   
+82           v3    2000.0   600000.0                     240.0        300.0   
+83           v3    2000.0  1100000.0                     240.0        300.0   
+
+    Flow_cms  flow_cmh    dz    hwc end_junc_path  hydraulic_gradient_per_m  \
+0   0.044444     160.0  50.0  140.0            p1                  0.050000   
+1   0.044444     160.0  50.0  140.0            p1                  0.050000   
+2   0.044444     160.0  50.0  140.0            p1                  0.050000   
+3   0.044444     160.0  50.0  140.0            p1                  0.050000   
+4   0.044444     160.0  50.0  140.0            p1                  0.050000   
+5   0.044444     160.0  50.0  140.0            p1                  0.050000   
+6   0.044444     160.0  50.0  140.0            p1                  0.050000   
+7   0.044444     160.0  50.0  140.0            p1                  0.050000   
+8   0.044444     160.0  50.0  140.0            p1                  0.050000   
+9   0.044444     160.0  50.0  140.0            p1                  0.050000   
+10  0.044444     160.0  50.0  140.0            p1                  0.050000   
+11  0.044444     160.0  50.0  140.0            p1                  0.050000   
+12  0.044444     160.0  50.0  140.0            p1                  0.050000   
+13  0.044444     160.0  50.0  140.0            p1                  0.050000   
+14  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+15  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+16  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+17  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+18  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+19  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+20  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+21  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+22  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+23  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+24  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+25  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+26  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+27  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+28  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+29  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+30  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+31  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+32  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+33  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+34  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+35  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+36  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+37  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+38  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+39  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+40  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+41  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+42  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+43  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+44  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+45  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+46  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+47  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+48  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+49  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+50  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+51  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+52  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+53  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+54  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+55  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+56  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+57  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+58  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+59  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+60  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+61  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+62  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+63  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+64  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+65  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+66  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+67  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+68  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+69  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+70  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+71  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+72  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+73  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+74  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+75  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+76  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+77  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+78  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+79  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+80  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+81  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+82  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+83  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+
+    headloss_per_m    lp_vars      Results original_pipe_id  
+0     2.081571e+02  p1_0.0254     0.000000               p1  
+1     7.116307e+00  p1_0.0508     0.000000               p1  
+2     9.876880e-01  p1_0.0762     0.000000               p1  
+3     2.432866e-01  p1_0.1016     0.000000               p1  
+4     3.376629e-02  p1_0.1524   145.451680               p1  
+5     8.317287e-03  p1_0.2032   854.548320               p1  
+6     2.805376e-03   p1_0.254     0.000000               p1  
+7     1.154375e-03  p1_0.3048     0.000000               p1  
+8     5.448653e-04  p1_0.3556     0.000000               p1  
+9     2.843447e-04  p1_0.4064     0.000000               p1  
+10    1.602182e-04  p1_0.4572     0.000000               p1  
+11    9.590796e-05   p1_0.508     0.000000               p1  
+12    6.029145e-05  p1_0.5588     0.000000               p1  
+13    3.946484e-05  p1_0.6096     0.000000               p1  
+14    1.847064e+02  p2_0.0254     0.000000               p2  
+15    6.314594e+00  p2_0.0508     0.000000               p2  
+16    8.764166e-01  p2_0.0762     0.000000               p2  
+17    2.158783e-01  p2_0.1016     0.000000               p2  
+18    2.996223e-02  p2_0.1524   500.000000               p2  
+19    7.380274e-03  p2_0.2032     0.000000               p2  
+20    2.489327e-03   p2_0.254     0.000000               p2  
+21    1.024325e-03  p2_0.3048     0.000000               p2  
+22    4.834816e-04  p2_0.3556     0.000000               p2  
+23    2.523109e-04  p2_0.4064     0.000000               p2  
+24    1.421683e-04  p2_0.4572     0.000000               p2  
+25    8.510311e-05   p2_0.508     0.000000               p2  
+26    5.349911e-05  p2_0.5588     0.000000               p2  
+27    3.501879e-05  p2_0.6096     0.000000               p2  
+28    2.414646e+01  p3_0.0254     0.000000               p3  
+29    8.254996e-01  p3_0.0508     0.000000               p3  
+30    1.145729e-01  p3_0.0762     0.000000               p3  
+31    2.822152e-02  p3_0.1016   200.000000               p3  
+32    3.916927e-03  p3_0.1524     0.000000               p3  
+33    9.648147e-04  p3_0.2032     0.000000               p3  
+34    3.254268e-04   p3_0.254     0.000000               p3  
+35    1.339088e-04  p3_0.3048     0.000000               p3  
+36    6.320499e-05  p3_0.3556     0.000000               p3  
+37    3.298431e-05  p3_0.4064     0.000000               p3  
+38    1.858550e-05  p3_0.4572     0.000000               p3  
+39    1.112543e-05   p3_0.508     0.000000               p3  
+40    6.993876e-06  p3_0.5588     0.000000               p3  
+41    4.577966e-06  p3_0.6096     0.000000               p3  
+42    2.414646e+01  p4_0.0254     0.000000               p4  
+43    8.254996e-01  p4_0.0508     0.000000               p4  
+44    1.145729e-01  p4_0.0762   169.083890               p4  
+45    2.822152e-02  p4_0.1016   530.916110               p4  
+46    3.916927e-03  p4_0.1524     0.000000               p4  
+47    9.648147e-04  p4_0.2032     0.000000               p4  
+48    3.254268e-04   p4_0.254     0.000000               p4  
+49    1.339088e-04  p4_0.3048     0.000000               p4  
+50    6.320499e-05  p4_0.3556     0.000000               p4  
+51    3.298431e-05  p4_0.4064     0.000000               p4  
+52    1.858550e-05  p4_0.4572     0.000000               p4  
+53    1.112543e-05   p4_0.508     0.000000               p4  
+54    6.993876e-06  p4_0.5588     0.000000               p4  
+55    4.577966e-06  p4_0.6096     0.000000               p4  
+56    1.225634e+00  p5_0.0254    35.828011               p5  
+57    4.190101e-02  p5_0.0508   264.171990               p5  
+58    5.815534e-03  p5_0.0762     0.000000               p5  
+59    1.432478e-03  p5_0.1016     0.000000               p5  
+60    1.988168e-04  p5_0.1524     0.000000               p5  
+61    4.897241e-05  p5_0.2032     0.000000               p5  
+62    1.651813e-05   p5_0.254     0.000000               p5  
+63    6.796989e-06  p5_0.3048     0.000000               p5  
+64    3.208182e-06  p5_0.3556     0.000000               p5  
+65    1.674229e-06  p5_0.4064     0.000000               p5  
+66    9.433693e-07  p5_0.4572     0.000000               p5  
+67    5.647087e-07   p5_0.508     0.000000               p5  
+68    3.549977e-07  p5_0.5588     0.000000               p5  
+69    2.323700e-07  p5_0.6096     0.000000               p5  
+70    8.716877e+01  p6_0.0254     0.000000               p6  
+71    2.980056e+00  p6_0.0508     0.000000               p6  
+72    4.136086e-01  p6_0.0762     0.000000               p6  
+73    1.018798e-01  p6_0.1016    19.600726               p6  
+74    1.414012e-02  p6_0.1524  1980.399300               p6  
+75    3.482984e-03  p6_0.2032     0.000000               p6  
+76    1.174792e-03   p6_0.254     0.000000               p6  
+77    4.834111e-04  p6_0.3048     0.000000               p6  
+78    2.281702e-04  p6_0.3556     0.000000               p6  
+79    1.190735e-04  p6_0.4064     0.000000               p6  
+80    6.709370e-05  p6_0.4572     0.000000               p6  
+81    4.016284e-05   p6_0.508     0.000000               p6  
+82    2.524791e-05  p6_0.5588     0.000000               p6  
+83    1.652647e-05  p6_0.6096     0.000000               p6  
+
+total_cost_of_operation: 72669.09932800001
+branches_end: [&#39;p1_0,p1_1,p2_0,p3_0,p4_0,p4_1&#39;, &#39;p1_0,p1_1,p5_0,p5_1&#39;, &#39;p1_0,p1_1,p2_0,p6_0,p6_1&#39;]
+results_branch: {&#39;p1_0,p1_1,p2_0,p3_0,p4_0,p4_1&#39;:     var_name Pipe_ID  Diameter_m  cost_USD_per_meter Start_Junction  \
+0  p1_0.1524      p1      0.1524                16.0         source   
+1  p1_0.2032      p1      0.2032                23.0         source   
+2  p2_0.1524      p2      0.1524                16.0              a   
+3  p3_0.1016      p3      0.1016                11.0              b   
+4  p4_0.0762      p4      0.0762                 8.0              c   
+5  p4_0.1016      p4      0.1016                11.0              c   
+
+  End_Junction  length_m  cost_USD  End_Junction_Elevation_m  static_head  \
+0            a    1000.0   16000.0                     250.0        300.0   
+1            a    1000.0   23000.0                     250.0        300.0   
+2            b     500.0    8000.0                     270.0        300.0   
+3            c     200.0    2200.0                     250.0        300.0   
+4           v1     700.0    5600.0                     230.0        300.0   
+5           v1     700.0    7700.0                     230.0        300.0   
+
+   Flow_cms  flow_cmh    dz    hwc end_junc_path  hydraulic_gradient_per_m  \
+0  0.044444     160.0  50.0  140.0            p1                      0.05   
+1  0.044444     160.0  50.0  140.0            p1                      0.05   
+2  0.041667     150.0  30.0  140.0         p1,p2                      0.06   
+3  0.013889      50.0  50.0  140.0      p1,p2,p3                      0.25   
+4  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                      0.10   
+5  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                      0.10   
+
+   headloss_per_m    lp_vars    Results original_pipe_id pipe_updated  \
+0        0.033766  p1_0.1524  145.45168               p1         p1_0   
+1        0.008317  p1_0.2032  854.54832               p1         p1_1   
+2        0.029962  p2_0.1524  500.00000               p2         p2_0   
+3        0.028222  p3_0.1016  200.00000               p3         p3_0   
+4        0.114573  p4_0.0762  169.08389               p4         p4_0   
+5        0.028222  p4_0.1016  530.91611               p4         p4_1   
+
+                    updated_path  branch_end   headloss  corrected_dz  \
+0                           p1_0           0   4.911363      7.272584   
+1                      p1_0,p1_1           0   7.107523     42.727416   
+2                 p1_0,p1_1,p2_0           0  14.981114     30.000000   
+3            p1_0,p1_1,p2_0,p3_0           0   5.644304     50.000000   
+4       p1_0,p1_1,p2_0,p3_0,p4_0           0  19.372437     16.908389   
+5  p1_0,p1_1,p2_0,p3_0,p4_0,p4_1           1  14.983260     53.091611   
+
+   Diameter_mm  flow_cms  total_head_losses  Total_Head_m  Pressure_Head_m  \
+0     0.000152  0.044444           4.911363    295.088637        45.088637   
+1     0.000203  0.044444          12.018886    287.981114        37.981114   
+2     0.000152  0.041667          27.000000    273.000000         3.000000   
+3     0.000102  0.013889          32.644304    267.355696        17.355696   
+4     0.000076  0.013889          52.016741    247.983259        17.983259   
+5     0.000102  0.013889          67.000000    233.000000         3.000000   
+
+   Velocity_m_s  Distance_from_Source_m  sort_index  
+0      2.436451               145.45168         1.0  
+1      1.370504              1000.00000         2.0  
+2      2.284173              1500.00000         3.0  
+3      1.713130              1700.00000         4.0  
+4      3.045564              1869.08389         5.0  
+5      1.713130              2400.00000         6.0  , &#39;p1_0,p1_1,p5_0,p5_1&#39;:     var_name Pipe_ID  Diameter_m  cost_USD_per_meter Start_Junction  \
+0  p1_0.1524      p1      0.1524                16.0         source   
+1  p1_0.2032      p1      0.2032                23.0         source   
+6  p5_0.0254      p5      0.0254                 2.0              a   
+7  p5_0.0508      p5      0.0508                 5.0              a   
+
+  End_Junction  length_m  cost_USD  End_Junction_Elevation_m  static_head  \
+0            a    1000.0   16000.0                     250.0        300.0   
+1            a    1000.0   23000.0                     250.0        300.0   
+6           v2     300.0     600.0                     230.0        300.0   
+7           v2     300.0    1500.0                     230.0        300.0   
+
+   Flow_cms  flow_cmh    dz    hwc end_junc_path  hydraulic_gradient_per_m  \
+0  0.044444     160.0  50.0  140.0            p1                  0.050000   
+1  0.044444     160.0  50.0  140.0            p1                  0.050000   
+6  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+7  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+
+   headloss_per_m    lp_vars     Results original_pipe_id pipe_updated  \
+0        0.033766  p1_0.1524  145.451680               p1         p1_0   
+1        0.008317  p1_0.2032  854.548320               p1         p1_1   
+6        1.225634  p5_0.0254   35.828011               p5         p5_0   
+7        0.041901  p5_0.0508  264.171990               p5         p5_1   
+
+          updated_path  branch_end   headloss  corrected_dz  Diameter_mm  \
+0                 p1_0           0   4.911363      7.272584     0.000152   
+1            p1_0,p1_1           0   7.107523     42.727416     0.000203   
+6       p1_0,p1_1,p5_0           0  43.912042      8.359869     0.000025   
+7  p1_0,p1_1,p5_0,p5_1           1  11.069072     61.640131     0.000051   
+
+   flow_cms  total_head_losses  Total_Head_m  Pressure_Head_m  Velocity_m_s  \
+0  0.044444           4.911363    295.088637        45.088637      2.436451   
+1  0.044444          12.018886    287.981114        37.981114      1.370504   
+6  0.002778          55.930928    244.069072        14.069072      5.482015   
+7  0.002778          67.000000    233.000000         3.000000      1.370504   
+
+   Distance_from_Source_m  sort_index  
+0              145.451680         1.0  
+1             1000.000000         2.0  
+6             1035.828011         3.0  
+7             1300.000001         4.0  , &#39;p1_0,p1_1,p2_0,p6_0,p6_1&#39;:     var_name Pipe_ID  Diameter_m  cost_USD_per_meter Start_Junction  \
+0  p1_0.1524      p1      0.1524                16.0         source   
+1  p1_0.2032      p1      0.2032                23.0         source   
+2  p2_0.1524      p2      0.1524                16.0              a   
+8  p6_0.1016      p6      0.1016                11.0              b   
+9  p6_0.1524      p6      0.1524                16.0              b   
+
+  End_Junction  length_m  cost_USD  End_Junction_Elevation_m  static_head  \
+0            a    1000.0   16000.0                     250.0        300.0   
+1            a    1000.0   23000.0                     250.0        300.0   
+2            b     500.0    8000.0                     270.0        300.0   
+8           v3    2000.0   22000.0                     240.0        300.0   
+9           v3    2000.0   32000.0                     240.0        300.0   
+
+   Flow_cms  flow_cmh    dz    hwc end_junc_path  hydraulic_gradient_per_m  \
+0  0.044444     160.0  50.0  140.0            p1                      0.05   
+1  0.044444     160.0  50.0  140.0            p1                      0.05   
+2  0.041667     150.0  30.0  140.0         p1,p2                      0.06   
+8  0.027778     100.0  60.0  140.0      p1,p2,p6                      0.03   
+9  0.027778     100.0  60.0  140.0      p1,p2,p6                      0.03   
+
+   headloss_per_m    lp_vars      Results original_pipe_id pipe_updated  \
+0        0.033766  p1_0.1524   145.451680               p1         p1_0   
+1        0.008317  p1_0.2032   854.548320               p1         p1_1   
+2        0.029962  p2_0.1524   500.000000               p2         p2_0   
+8        0.101880  p6_0.1016    19.600726               p6         p6_0   
+9        0.014140  p6_0.1524  1980.399300               p6         p6_1   
+
+               updated_path  branch_end   headloss  corrected_dz  Diameter_mm  \
+0                      p1_0           0   4.911363      7.272584     0.000152   
+1                 p1_0,p1_1           0   7.107523     42.727416     0.000203   
+2            p1_0,p1_1,p2_0           0  14.981114     30.000000     0.000152   
+8       p1_0,p1_1,p2_0,p6_0           0   1.996917      0.588022     0.000102   
+9  p1_0,p1_1,p2_0,p6_0,p6_1           1  28.003083     59.411979     0.000152   
+
+   flow_cms  total_head_losses  Total_Head_m  Pressure_Head_m  Velocity_m_s  \
+0  0.044444           4.911363    295.088637        45.088637      2.436451   
+1  0.044444          12.018886    287.981114        37.981114      1.370504   
+2  0.041667          27.000000    273.000000         3.000000      2.284173   
+8  0.027778          28.996917    271.003083        31.003083      3.426259   
+9  0.027778          57.000000    243.000000         3.000000      1.522782   
+
+   Distance_from_Source_m  sort_index  
+0              145.451680         1.0  
+1             1000.000000         2.0  
+2             1500.000000         3.0  
+8             1519.600726         4.0  
+9             3500.000026         5.0  }
+df_res:
+    var_name Pipe_ID  Diameter_m  cost_USD_per_meter Start_Junction  \
+0  p1_0.1524      p1      0.1524                16.0         source   
+1  p1_0.2032      p1      0.2032                23.0         source   
+2  p2_0.1524      p2      0.1524                16.0              a   
+3  p3_0.1016      p3      0.1016                11.0              b   
+4  p4_0.0762      p4      0.0762                 8.0              c   
+5  p4_0.1016      p4      0.1016                11.0              c   
+6  p5_0.0254      p5      0.0254                 2.0              a   
+7  p5_0.0508      p5      0.0508                 5.0              a   
+8  p6_0.1016      p6      0.1016                11.0              b   
+9  p6_0.1524      p6      0.1524                16.0              b   
+
+  End_Junction  length_m  cost_USD  End_Junction_Elevation_m  static_head  \
+0            a    1000.0   16000.0                     250.0        300.0   
+1            a    1000.0   23000.0                     250.0        300.0   
+2            b     500.0    8000.0                     270.0        300.0   
+3            c     200.0    2200.0                     250.0        300.0   
+4           v1     700.0    5600.0                     230.0        300.0   
+5           v1     700.0    7700.0                     230.0        300.0   
+6           v2     300.0     600.0                     230.0        300.0   
+7           v2     300.0    1500.0                     230.0        300.0   
+8           v3    2000.0   22000.0                     240.0        300.0   
+9           v3    2000.0   32000.0                     240.0        300.0   
+
+   Flow_cms  flow_cmh    dz    hwc end_junc_path  hydraulic_gradient_per_m  \
+0  0.044444     160.0  50.0  140.0            p1                  0.050000   
+1  0.044444     160.0  50.0  140.0            p1                  0.050000   
+2  0.041667     150.0  30.0  140.0         p1,p2                  0.060000   
+3  0.013889      50.0  50.0  140.0      p1,p2,p3                  0.250000   
+4  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+5  0.013889      50.0  70.0  140.0   p1,p2,p3,p4                  0.100000   
+6  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+7  0.002778      10.0  70.0  140.0         p1,p5                  0.233333   
+8  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+9  0.027778     100.0  60.0  140.0      p1,p2,p6                  0.030000   
+
+   headloss_per_m    lp_vars      Results original_pipe_id pipe_updated  \
+0        0.033766  p1_0.1524   145.451680               p1         p1_0   
+1        0.008317  p1_0.2032   854.548320               p1         p1_1   
+2        0.029962  p2_0.1524   500.000000               p2         p2_0   
+3        0.028222  p3_0.1016   200.000000               p3         p3_0   
+4        0.114573  p4_0.0762   169.083890               p4         p4_0   
+5        0.028222  p4_0.1016   530.916110               p4         p4_1   
+6        1.225634  p5_0.0254    35.828011               p5         p5_0   
+7        0.041901  p5_0.0508   264.171990               p5         p5_1   
+8        0.101880  p6_0.1016    19.600726               p6         p6_0   
+9        0.014140  p6_0.1524  1980.399300               p6         p6_1   
+
+                    updated_path  branch_end   headloss  corrected_dz  \
+0                           p1_0           0   4.911363      7.272584   
+1                      p1_0,p1_1           0   7.107523     42.727416   
+2                 p1_0,p1_1,p2_0           0  14.981114     30.000000   
+3            p1_0,p1_1,p2_0,p3_0           0   5.644304     50.000000   
+4       p1_0,p1_1,p2_0,p3_0,p4_0           0  19.372437     16.908389   
+5  p1_0,p1_1,p2_0,p3_0,p4_0,p4_1           1  14.983260     53.091611   
+6                 p1_0,p1_1,p5_0           0  43.912042      8.359869   
+7            p1_0,p1_1,p5_0,p5_1           1  11.069072     61.640131   
+8            p1_0,p1_1,p2_0,p6_0           0   1.996917      0.588022   
+9       p1_0,p1_1,p2_0,p6_0,p6_1           1  28.003083     59.411979   
+
+   Diameter_mm  flow_cms  total_head_losses  Total_Head_m  Pressure_Head_m  \
+0     0.000152  0.044444           4.911363    295.088637        45.088637   
+1     0.000203  0.044444          12.018886    287.981114        37.981114   
+2     0.000152  0.041667          27.000000    273.000000         3.000000   
+3     0.000102  0.013889          32.644304    267.355696        17.355696   
+4     0.000076  0.013889          52.016741    247.983259        17.983259   
+5     0.000102  0.013889          67.000000    233.000000         3.000000   
+6     0.000025  0.002778          55.930928    244.069072        14.069072   
+7     0.000051  0.002778          67.000000    233.000000         3.000000   
+8     0.000102  0.027778          28.996917    271.003083        31.003083   
+9     0.000152  0.027778          57.000000    243.000000         3.000000   
+
+   Velocity_m_s  Distance_from_Source_m  
+0      2.436451              145.451680  
+1      1.370504             1000.000000  
+2      2.284173             1500.000000  
+3      1.713130             1700.000000  
+4      3.045564             1869.083890  
+5      1.713130             2400.000000  
+6      5.482015             1035.828011  
+7      1.370504             1300.000001  
+8      3.426259             1519.600726  
+9      1.522782             3500.000026  
+
+pipes_summery:
+  Pipe_ID  Diameter_mm  Velocity_m_s  length_m  flow_cmh   headloss
+0      p1     0.000152      2.436451    1000.0     160.0   4.911363
+1      p1     0.000203      1.370504    1000.0     160.0   7.107523
+2      p2     0.000152      2.284173     500.0     150.0  14.981114
+3      p3     0.000102      1.713130     200.0      50.0   5.644304
+4      p4     0.000076      3.045564     700.0      50.0  19.372437
+5      p4     0.000102      1.713130     700.0      50.0  14.983260
+6      p5     0.000025      5.482015     300.0      10.0  43.912042
+7      p5     0.000051      1.370504     300.0      10.0  11.069072
+8      p6     0.000102      3.426259    2000.0     100.0   1.996917
+9      p6     0.000152      1.522782    2000.0     100.0  28.003083
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Optimization_of_branch_networks.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Designing Branched Water Networks with <code class="docutils literal notranslate"><span class="pre">BNHA</span></code></p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Roy Elkayam
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

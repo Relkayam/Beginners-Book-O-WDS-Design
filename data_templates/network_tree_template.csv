@@ -1,0 +1,7 @@
+Pipe_ID,Diameter_m,Start_Junction,End_Junction,length_m,flow_cmh,End_Junction_Elevation_m,static_head,hwc,branch_end,end_junc_path
+p1,0.5,source,a,1000,160,250,300,140,0,p1
+p2,0.5,a,b,500,150,270,300,140,0,"p1,p2"
+p3,0.5,b,c,200,50,250,300,140,0,"p1,p2,p3"
+p4,0.5,c,v1,700,50,230,300,140,1,"p1,p2,p3,p4"
+p5,0.5,a,v2,300,10,230,300,140,1,"p1,p5"
+p6,0.5,b,v3,2000,100,240,300,140,1,"p1,p2,p6"
