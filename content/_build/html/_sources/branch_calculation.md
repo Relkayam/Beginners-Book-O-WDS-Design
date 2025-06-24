@@ -54,11 +54,26 @@ The roughness coefficient depends on the pipe's material and age. Higher values 
 
 Understanding the energy in a pipe system is crucial for analysis:
 
-- **Energy Grade Line (EGL)** represents the total energy head: $H_{EGL} = z + \\frac{p}{\\gamma} + \\frac{v^2}{2g}$
-- **Hydraulic Grade Line (HGL)** represents the piezometric head: $H_{HGL} = z + \\frac{p}{\\gamma}$
-- **Pressure Head** is the difference between the HGL and the pipe elevation: $\\frac{p}{\\gamma} = H_{HGL} - z$
+- **Energy Grade Line (EGL)** represents the total energy head:
 
-where $z$ is elevation, $p$ is pressure, $\\gamma$ is the specific weight of water, $v$ is velocity, and $g$ is gravity. The HGL is what determines the pressure in the pipes.
+
+  $$ H_{EGL} = z + \frac{p}{\gamma} + \frac{v^2}{2g} $$
+
+
+- **Hydraulic Grade Line (HGL)** represents the piezometric head:
+
+  $$ H_{HGL} = z + \frac{p}{\gamma} $$
+
+- **Pressure Head** is the difference between the HGL and the pipe elevation:
+
+  $$ \frac{p}{\gamma} = H_{HGL} - z $$
+
+where $z$ is elevation, $p$ is pressure, ${\gamma}$ is the specific weight of water, $v$ is velocity, and $g$ is gravity. The HGL is what determines the pressure in the pipes.
+
+
+
+
+
 
 ---
 
