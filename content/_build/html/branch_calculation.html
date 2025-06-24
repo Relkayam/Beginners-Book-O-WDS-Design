@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Branch Network Hydraulic Analysis &#8212; Optimizing Water Distribution System Design</title>
+    <title>Chapter 3: Branch Network Hydraulic Analysis &#8212; Optimizing Water Distribution System Design</title>
   
   
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'branch_calculation';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Designing Branched Water Networks with BNHA" href="Optimization_of_branch_networks.html" />
-    <link rel="prev" title="Choosing the Optimal Pipe Diameter in a Water Supply System" href="Economic_diameter.html" />
+    <link rel="next" title="Chapter 4: Optimization of Branched Networks" href="Optimization_of_branch_networks.html" />
+    <link rel="prev" title="Chapter 2: Choosing the Optimal Pipe Diameter in a Water Supply System" href="Economic_diameter.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -177,18 +177,21 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    About this Book
+                    Welcome to the Water Distribution System Design Book
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Core Chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Economic_diameter.html">Chapter 2: Choosing the Optimal Pipe Diameter in a Water Supply System</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 3: Branch Network Hydraulic Analysis</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Optimization_of_branch_networks.html">Chapter 4: Optimization of Branched Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Branch_Calculation_Example.html">Chapter 5: Branch Network Optimization – Full Example</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="python_essential.html">Python Essentials: Jupyter Notebooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Economic_diameter.html">Choosing the Optimal Pipe Diameter in a Water Supply System</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Branch Network Hydraulic Analysis</a></li>
-
-
-<li class="toctree-l1"><a class="reference internal" href="Optimization_of_branch_networks.html">Designing Branched Water Networks with <code class="docutils literal notranslate"><span class="pre">BNHA</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="Branch_Calculation_Example.html">Branch Network Optimization – Full Example</a></li>
 </ul>
 
     </div>
@@ -374,7 +377,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Branch Network Hydraulic Analysis</h1>
+    <h1>Chapter 3: Branch Network Hydraulic Analysis</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -384,42 +387,37 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Branch Network Hydraulic Analysis</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 3: Branch Network Hydraulic Analysis</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1. Introduction</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Branch Network Hydraulic Analysis</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-branched-networks">1. Introduction to Branched Networks</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-background">2. Theoretical Background</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazen-williams-equation">2.1 Hazen-Williams Equation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazen-williams-roughness-coefficients">2.2 Hazen-Williams Roughness Coefficients</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-and-hydraulic-grade-lines">2.3 Energy and Hydraulic Grade Lines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazen-williams-roughness-coefficients-c">2.2 Hazen-Williams Roughness Coefficients (<span class="math notranslate nohighlight">\(C\)</span>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-and-hydraulic-grade-lines-egl-hgl">2.3 Energy and Hydraulic Grade Lines (EGL &amp; HGL)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methodology">3. Methodology</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methodology-for-analysis">3. Methodology for Analysis</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#network-representation">3.1 Network Representation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-algorithm">3.2 Solution Algorithm</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#design-considerations">3.3 Design Considerations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-design-considerations">3.3 Key Design Considerations</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation-guide">4. Implementation Guide</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-implementation-guide">4. Python Implementation Guide</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#required-libraries">4.1 Required Libraries</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#head-loss-function">4.2 Head Loss Function</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-calculation">4.3 Velocity Calculation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-function">4.3 Velocity Function</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#network-analysis-function">4.4 Network Analysis Function</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results-interpretation">5. Results Interpretation</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-the-results">5. Interpreting the Results</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hydraulic-performance-metrics">5.1 Hydraulic Performance Metrics</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization-and-analysis">5.2 Visualization and Analysis</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#design-optimization">5.3 Design Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-tool-for-design">5.3 Using the Tool for Design</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-applications">6. Practical Applications</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-analysis">6.1 Sensitivity Analysis</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#design-scenarios">6.2 Design Scenarios</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regulatory-compliance">6.3 Regulatory Compliance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-input">6.2 Optimization Input</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-and-assumptions">7. Limitations and Assumptions</a><ul class="nav section-nav flex-column">
@@ -452,141 +450,133 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="branch-network-hydraulic-analysis">
-<h1>Branch Network Hydraulic Analysis<a class="headerlink" href="#branch-network-hydraulic-analysis" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-3-branch-network-hydraulic-analysis">
+<h1>Chapter 3: Branch Network Hydraulic Analysis<a class="headerlink" href="#chapter-3-branch-network-hydraulic-analysis" title="Link to this heading">#</a></h1>
 <hr class="docutils" />
 <section id="learning-objectives">
 <h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
-<p>By the end of this chapter, students will be able to:</p>
+<p>By the end of this chapter, you will be able to:</p>
 <ul class="simple">
-<li><p>Analyze hydraulic grade lines and energy grade lines in branched systems</p></li>
-<li><p>Evaluate the impact of pipe diameter selection on system performance</p></li>
-<li><p>Use computational tools to optimize pipe sizing decisions</p></li>
-<li><p>Interpret hydraulic analysis results for design decision-making</p></li>
+<li><p><strong>Apply</strong> the Hazen-Williams equation to calculate head losses in pipe networks.</p></li>
+<li><p><strong>Analyze</strong> hydraulic and energy grade lines in branched systems.</p></li>
+<li><p><strong>Evaluate</strong> the impact of pipe diameter selection on system performance.</p></li>
+<li><p><strong>Use</strong> computational tools to inform pipe sizing decisions.</p></li>
+<li><p><strong>Interpret</strong> hydraulic analysis results for design and optimization.</p></li>
 </ul>
 </section>
-<section id="introduction">
-<h2>1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
-<p>Water distribution networks are complex systems that require careful hydraulic analysis to ensure adequate service to all consumers. This chapter focuses on the hydraulic analysis of branched networks, which are common in suburban and rural water distribution systems. Unlike looped networks, branched systems have a tree-like structure with a single path from the source to each demand node.
-The primary objective of this exercise is to develop a computational tool that allows engineers to evaluate different pipe diameter combinations and observe their effects on system hydraulics. This approach provides valuable insight into the trade-offs between pipe costs and hydraulic performance, forming the foundation for optimal network design.</p>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>Branch Network Hydraulic Analysis<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
-<section id="id2">
-<h2>Learning Objectives<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
-<p>By the end of this chapter, students will be able to:</p>
-<ul class="simple">
-<li><p>Apply the Hazen-Williams equation to calculate head losses in pipe networks</p></li>
-<li><p>Analyze hydraulic grade lines and energy grade lines in branched systems</p></li>
-<li><p>Evaluate the impact of pipe diameter selection on system performance</p></li>
-<li><p>Use computational tools to optimize pipe sizing decisions</p></li>
-<li><p>Interpret hydraulic analysis results for design decision-making</p></li>
-</ul>
+<hr class="docutils" />
+<section id="introduction-to-branched-networks">
+<h2>1. Introduction to Branched Networks<a class="headerlink" href="#introduction-to-branched-networks" title="Link to this heading">#</a></h2>
+<p>Water distribution networks are complex systems requiring careful hydraulic analysis to ensure reliable service. This chapter focuses on <strong>branched networks</strong>, which feature a tree-like structure where there is only one path from the source to each demand point. These are common in rural and suburban areas.</p>
+<p>The goal of this chapter is to build a computational tool for evaluating how different pipe diameters affect system hydraulics. This analysis is fundamental to understanding the trade-offs between pipe costs and hydraulic performance, paving the way for network optimization.</p>
 </section>
 <hr class="docutils" />
 <section id="theoretical-background">
 <h2>2. Theoretical Background<a class="headerlink" href="#theoretical-background" title="Link to this heading">#</a></h2>
 <section id="hazen-williams-equation">
 <h3>2.1 Hazen-Williams Equation<a class="headerlink" href="#hazen-williams-equation" title="Link to this heading">#</a></h3>
-<p>The Hazen-Williams equation is widely used in water distribution system analysis due to its simplicity and reasonable accuracy for water flow in pipes. The equation relates head loss to flow rate, pipe characteristics, and fluid properties:</p>
+<p>The Hazen-Williams equation is a widely-used empirical formula for calculating head loss in water pipes. Its simplicity and reasonable accuracy make it a standard tool in water distribution system analysis.</p>
 <div class="math notranslate nohighlight">
-\[h_f = \frac{10.67 \cdot L \cdot Q^{1.852}}{C^{1.852} \cdot d^{4.8704}}\]</div>
+\[
+h_f = \frac{10.67\,L\,Q^{1.852}}{C^{1.852}\,d^{4.8704}}
+\]</div>
 <p>where:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(h_f\)</span> = head loss due to friction (m)</p></li>
 <li><p><span class="math notranslate nohighlight">\(L\)</span> = pipe length (m)</p></li>
 <li><p><span class="math notranslate nohighlight">\(Q\)</span> = flow rate (m³/s)</p></li>
 <li><p><span class="math notranslate nohighlight">\(C\)</span> = Hazen-Williams roughness coefficient (dimensionless)</p></li>
-<li><p><span class="math notranslate nohighlight">\(d\)</span> = pipe internal diameter (m)</p></li>
+<li><p><span class="math notranslate nohighlight">\(d\)</span> = internal pipe diameter (m)</p></li>
 </ul>
 </section>
-<section id="hazen-williams-roughness-coefficients">
-<h3>2.2 Hazen-Williams Roughness Coefficients<a class="headerlink" href="#hazen-williams-roughness-coefficients" title="Link to this heading">#</a></h3>
-<p>The roughness coefficient <span class="math notranslate nohighlight">\(C\)</span> depends on pipe material and condition:</p>
+<section id="hazen-williams-roughness-coefficients-c">
+<h3>2.2 Hazen-Williams Roughness Coefficients (<span class="math notranslate nohighlight">\(C\)</span>)<a class="headerlink" href="#hazen-williams-roughness-coefficients-c" title="Link to this heading">#</a></h3>
+<p>The roughness coefficient depends on the pipe’s material and age. Higher values indicate smoother pipes.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Pipe Material</p></th>
 <th class="head"><p>New Pipe</p></th>
-<th class="head"><p>10+ Years Service</p></th>
+<th class="head"><p>10+ Years of Service</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Ductile Iron</p></td>
-<td><p>130-140</p></td>
-<td><p>100-130</p></td>
+<td><p>130–140</p></td>
+<td><p>100–130</p></td>
 </tr>
 <tr class="row-odd"><td><p>Steel</p></td>
-<td><p>120-130</p></td>
-<td><p>80-120</p></td>
+<td><p>120–130</p></td>
+<td><p>80–120</p></td>
 </tr>
 <tr class="row-even"><td><p>Concrete</p></td>
-<td><p>120-130</p></td>
-<td><p>85-120</p></td>
+<td><p>120–130</p></td>
+<td><p>85–120</p></td>
 </tr>
 <tr class="row-odd"><td><p>PVC</p></td>
-<td><p>140-150</p></td>
-<td><p>130-140</p></td>
+<td><p>140–150</p></td>
+<td><p>130–140</p></td>
 </tr>
 <tr class="row-even"><td><p>HDPE</p></td>
-<td><p>140-150</p></td>
-<td><p>130-140</p></td>
+<td><p>140–150</p></td>
+<td><p>130–140</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 </section>
-<section id="energy-and-hydraulic-grade-lines">
-<h3>2.3 Energy and Hydraulic Grade Lines<a class="headerlink" href="#energy-and-hydraulic-grade-lines" title="Link to this heading">#</a></h3>
-<p>Understanding energy relationships in pipe flow is crucial for network analysis:</p>
+<section id="energy-and-hydraulic-grade-lines-egl-hgl">
+<h3>2.3 Energy and Hydraulic Grade Lines (EGL &amp; HGL)<a class="headerlink" href="#energy-and-hydraulic-grade-lines-egl-hgl" title="Link to this heading">#</a></h3>
+<p>Understanding the energy in a pipe system is crucial for analysis:</p>
 <ul class="simple">
-<li><p><strong>Total Head (Energy Grade Line)</strong>: <span class="math notranslate nohighlight">\(H = z + \frac{p}{\gamma} + \frac{v^2}{2g}\)</span></p></li>
-<li><p><strong>Piezometric Head (Hydraulic Grade Line)</strong>: <span class="math notranslate nohighlight">\(H_{HGL} = z + \frac{p}{\gamma}\)</span></p></li>
-<li><p><strong>Pressure Head</strong>: <span class="math notranslate nohighlight">\(\frac{p}{\gamma} = H_{HGL} - z\)</span></p></li>
+<li><p><strong>Energy Grade Line (EGL)</strong> represents the total energy head: <span class="math notranslate nohighlight">\(H_{EGL} = z + \\frac{p}{\\gamma} + \\frac{v^2}{2g}\)</span></p></li>
+<li><p><strong>Hydraulic Grade Line (HGL)</strong> represents the piezometric head: <span class="math notranslate nohighlight">\(H_{HGL} = z + \\frac{p}{\\gamma}\)</span></p></li>
+<li><p><strong>Pressure Head</strong> is the difference between the HGL and the pipe elevation: <span class="math notranslate nohighlight">\(\\frac{p}{\\gamma} = H_{HGL} - z\)</span></p></li>
 </ul>
-<p>where <span class="math notranslate nohighlight">\(z\)</span> is elevation, <span class="math notranslate nohighlight">\(p\)</span> is pressure, <span class="math notranslate nohighlight">\(\gamma\)</span> is specific weight of water, <span class="math notranslate nohighlight">\(v\)</span> is velocity, and <span class="math notranslate nohighlight">\(g\)</span> is gravitational acceleration.</p>
+<p>where <span class="math notranslate nohighlight">\(z\)</span> is elevation, <span class="math notranslate nohighlight">\(p\)</span> is pressure, <span class="math notranslate nohighlight">\(\\gamma\)</span> is the specific weight of water, <span class="math notranslate nohighlight">\(v\)</span> is velocity, and <span class="math notranslate nohighlight">\(g\)</span> is gravity. The HGL is what determines the pressure in the pipes.</p>
 </section>
 </section>
 <hr class="docutils" />
-<section id="methodology">
-<h2>3. Methodology<a class="headerlink" href="#methodology" title="Link to this heading">#</a></h2>
+<section id="methodology-for-analysis">
+<h2>3. Methodology for Analysis<a class="headerlink" href="#methodology-for-analysis" title="Link to this heading">#</a></h2>
 <section id="network-representation">
 <h3>3.1 Network Representation<a class="headerlink" href="#network-representation" title="Link to this heading">#</a></h3>
-<p>The branched network is represented using a dictionary-based data structure where each pipe segment contains:</p>
+<p>A branched network can be efficiently represented using a dictionary or a similar data structure. Each pipe segment (or branch) should store its key properties:</p>
 <ul class="simple">
-<li><p>Geometric properties (length, diameter)</p></li>
-<li><p>Hydraulic properties (flow rate, roughness coefficient)</p></li>
-<li><p>Calculated results (head loss, velocity)</p></li>
+<li><p><strong>Geometric</strong>: Length, diameter, start/end elevations.</p></li>
+<li><p><strong>Hydraulic</strong>: Flow rate, roughness coefficient.</p></li>
+<li><p><strong>Calculated</strong>: Head loss, velocity.</p></li>
 </ul>
 </section>
 <section id="solution-algorithm">
 <h3>3.2 Solution Algorithm<a class="headerlink" href="#solution-algorithm" title="Link to this heading">#</a></h3>
-<p>The analysis follows these sequential steps:</p>
+<p>The hydraulic analysis proceeds sequentially from the upstream source to the downstream nodes:</p>
 <ol class="arabic simple">
-<li><p><strong>Initialize Network Geometry</strong>: Define pipe lengths, elevations, and connectivity</p></li>
-<li><p><strong>Specify Design Parameters</strong>: Set flow rates and select pipe diameters</p></li>
-<li><p><strong>Calculate Head Losses</strong>: Apply Hazen-Williams equation to each pipe segment</p></li>
-<li><p><strong>Compute Hydraulic Grade Line</strong>: Starting from the source, subtract head losses moving downstream</p></li>
-<li><p><strong>Determine Pressure Heads</strong>: Calculate pressure at each node using energy equation</p></li>
-<li><p><strong>Evaluate Design Adequacy</strong>: Check minimum pressure requirements and system constraints</p></li>
+<li><p><strong>Initialize Network Geometry</strong>: Define pipe lengths, node elevations, and connectivity.</p></li>
+<li><p><strong>Set Design Parameters</strong>: Assign flow rates and select initial pipe diameters for analysis.</p></li>
+<li><p><strong>Calculate Head Losses</strong>: Apply the Hazen-Williams equation to each pipe segment.</p></li>
+<li><p><strong>Compute Hydraulic Grade Line (HGL)</strong>: Starting from the source with a known head, subtract the calculated head loss for each pipe segment to find the head at the next downstream node.</p></li>
+<li><p><strong>Determine Nodal Pressures</strong>: Calculate the pressure at each node by subtracting the node’s elevation from its HGL value.</p></li>
+<li><p><strong>Evaluate Design</strong>: Check if the pressures and velocities meet the required design constraints.</p></li>
 </ol>
 </section>
-<section id="design-considerations">
-<h3>3.3 Design Considerations<a class="headerlink" href="#design-considerations" title="Link to this heading">#</a></h3>
-<p>When selecting pipe diameters, engineers must consider:</p>
+<section id="key-design-considerations">
+<h3>3.3 Key Design Considerations<a class="headerlink" href="#key-design-considerations" title="Link to this heading">#</a></h3>
+<p>When selecting pipe diameters, engineers must balance multiple factors:</p>
 <ul class="simple">
-<li><p><strong>Minimum Pressure Requirements</strong>: Typically 20-35 m (200-350 kPa) at demand nodes</p></li>
-<li><p><strong>Maximum Velocity Limits</strong>: Generally 1.5-3 m/s to minimize head losses and water hammer effects</p></li>
-<li><p><strong>Economic Optimization</strong>: Balance between pipe costs and pumping costs</p></li>
-<li><p><strong>Fire Flow Requirements</strong>: Ensure adequate capacity for emergency demands</p></li>
+<li><p><strong>Minimum Pressure</strong>: Typically 20–35 m (200–350 kPa) must be maintained at all demand nodes.</p></li>
+<li><p><strong>Maximum Velocity</strong>: Velocities are often kept below 3 m/s to prevent issues like water hammer and excessive head loss.</p></li>
+<li><p><strong>Economic Optimization</strong>: The goal is to minimize total cost, which includes both the initial pipe installation cost and long-term pumping (energy) costs.</p></li>
+<li><p><strong>Fire Flow Demands</strong>: The system must be able to provide higher flows during emergencies, which can be a critical factor in pipe sizing.</p></li>
 </ul>
 </section>
 </section>
 <hr class="docutils" />
-<section id="implementation-guide">
-<h2>4. Implementation Guide<a class="headerlink" href="#implementation-guide" title="Link to this heading">#</a></h2>
+<section id="python-implementation-guide">
+<h2>4. Python Implementation Guide<a class="headerlink" href="#python-implementation-guide" title="Link to this heading">#</a></h2>
+<p>Here, we provide Python functions to implement the hydraulic analysis.</p>
 <section id="required-libraries">
 <h3>4.1 Required Libraries<a class="headerlink" href="#required-libraries" title="Link to this heading">#</a></h3>
+<p>These libraries are essential for data handling and creating visualizations.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
@@ -596,36 +586,38 @@ The primary objective of this exercise is to develop a computational tool that a
 </section>
 <section id="head-loss-function">
 <h3>4.2 Head Loss Function<a class="headerlink" href="#head-loss-function" title="Link to this heading">#</a></h3>
+<p>This function implements the Hazen-Williams equation.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calculate_head_loss</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculate head loss using Hazen-Williams equation</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates head loss using the Hazen-Williams equation.</span>
 <span class="sd">    </span>
-<span class="sd">    Parameters:</span>
-<span class="sd">    L (float): Pipe length (m)</span>
-<span class="sd">    Q (float): Flow rate (m³/s)</span>
-<span class="sd">    C (float): Hazen-Williams coefficient</span>
-<span class="sd">    d (float): Pipe diameter (m)</span>
+<span class="sd">    Args:</span>
+<span class="sd">        L (float): Pipe length (m).</span>
+<span class="sd">        Q (float): Flow rate (m³/s).</span>
+<span class="sd">        C (float): Hazen-Williams roughness coefficient.</span>
+<span class="sd">        d (float): Pipe diameter (m).</span>
 <span class="sd">    </span>
 <span class="sd">    Returns:</span>
-<span class="sd">    float: Head loss (m)</span>
+<span class="sd">        float: Frictional head loss (m).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">d</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>  <span class="c1"># Avoid division by zero</span>
     
     <span class="k">return</span> <span class="p">(</span><span class="mf">10.67</span> <span class="o">*</span> <span class="n">L</span> <span class="o">*</span> <span class="n">Q</span><span class="o">**</span><span class="mf">1.852</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">C</span><span class="o">**</span><span class="mf">1.852</span> <span class="o">*</span> <span class="n">d</span><span class="o">**</span><span class="mf">4.8704</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
-<section id="velocity-calculation">
-<h3>4.3 Velocity Calculation<a class="headerlink" href="#velocity-calculation" title="Link to this heading">#</a></h3>
+<section id="velocity-function">
+<h3>4.3 Velocity Function<a class="headerlink" href="#velocity-function" title="Link to this heading">#</a></h3>
+<p>This function calculates the flow velocity inside a pipe.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calculate_velocity</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculate flow velocity in pipe</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the flow velocity in a circular pipe.</span>
 <span class="sd">    </span>
-<span class="sd">    Parameters:</span>
-<span class="sd">    Q (float): Flow rate (m³/s)</span>
-<span class="sd">    d (float): Pipe diameter (m)</span>
+<span class="sd">    Args:</span>
+<span class="sd">        Q (float): Flow rate (m³/s).</span>
+<span class="sd">        d (float): Pipe diameter (m).</span>
 <span class="sd">    </span>
 <span class="sd">    Returns:</span>
-<span class="sd">    float: Velocity (m/s)</span>
+<span class="sd">        float: Flow velocity (m/s).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">d</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">0</span>
@@ -637,18 +629,18 @@ The primary objective of this exercise is to develop a computational tool that a
 </section>
 <section id="network-analysis-function">
 <h3>4.4 Network Analysis Function<a class="headerlink" href="#network-analysis-function" title="Link to this heading">#</a></h3>
+<p>This function orchestrates the entire analysis, from calculating losses to determining nodal pressures.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">analyze_network</span><span class="p">(</span><span class="n">pipes_dict</span><span class="p">,</span> <span class="n">reservoir_head</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Perform complete hydraulic analysis of branched network</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Performs a complete hydraulic analysis of a branched network.</span>
 <span class="sd">    </span>
-<span class="sd">    Parameters:</span>
-<span class="sd">    pipes_dict (dict): Dictionary containing pipe data</span>
-<span class="sd">    reservoir_head (float): Total head at reservoir (m)</span>
+<span class="sd">    Args:</span>
+<span class="sd">        pipes_dict (dict): A dictionary containing the data for each pipe.</span>
+<span class="sd">        reservoir_head (float): The total head at the upstream reservoir (m).</span>
 <span class="sd">    </span>
 <span class="sd">    Returns:</span>
-<span class="sd">    pandas.DataFrame: Analysis results</span>
+<span class="sd">        pd.DataFrame: A DataFrame containing the analysis results for each node.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Calculate head losses</span>
+    <span class="c1"># First, calculate head loss and velocity for each pipe</span>
     <span class="k">for</span> <span class="n">pipe_id</span><span class="p">,</span> <span class="n">pipe_data</span> <span class="ow">in</span> <span class="n">pipes_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="n">pipe_data</span><span class="p">[</span><span class="s1">&#39;head_loss&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">calculate_head_loss</span><span class="p">(</span>
             <span class="n">pipe_data</span><span class="p">[</span><span class="s1">&#39;L&#39;</span><span class="p">],</span> <span class="n">pipe_data</span><span class="p">[</span><span class="s1">&#39;Q&#39;</span><span class="p">],</span> 
@@ -658,35 +650,37 @@ The primary objective of this exercise is to develop a computational tool that a
             <span class="n">pipe_data</span><span class="p">[</span><span class="s1">&#39;Q&#39;</span><span class="p">],</span> <span class="n">pipe_data</span><span class="p">[</span><span class="s1">&#39;d&#39;</span><span class="p">]</span>
         <span class="p">)</span>
     
-    <span class="c1"># Calculate hydraulic grade line</span>
+    <span class="c1"># Sequentially calculate HGL and pressures</span>
     <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">cumulative_distance</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">current_total_head</span> <span class="o">=</span> <span class="n">reservoir_head</span>
+    <span class="n">current_hgl</span> <span class="o">=</span> <span class="n">reservoir_head</span>
     
+    <span class="c1"># Assuming pipes are sorted upstream to downstream</span>
     <span class="k">for</span> <span class="n">pipe_id</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">pipes_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
         <span class="n">pipe</span> <span class="o">=</span> <span class="n">pipes_dict</span><span class="p">[</span><span class="n">pipe_id</span><span class="p">]</span>
         
-        <span class="c1"># Node at start of pipe</span>
+        <span class="c1"># Node at the start of the pipe</span>
         <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
             <span class="s1">&#39;Node&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Node_</span><span class="si">{</span><span class="n">pipe_id</span><span class="si">}</span><span class="s1">_start&#39;</span><span class="p">,</span>
             <span class="s1">&#39;Distance&#39;</span><span class="p">:</span> <span class="n">cumulative_distance</span><span class="p">,</span>
             <span class="s1">&#39;Elevation&#39;</span><span class="p">:</span> <span class="n">pipe</span><span class="p">[</span><span class="s1">&#39;z_start&#39;</span><span class="p">],</span>
-            <span class="s1">&#39;Total_Head&#39;</span><span class="p">:</span> <span class="n">current_total_head</span><span class="p">,</span>
-            <span class="s1">&#39;Pressure_Head&#39;</span><span class="p">:</span> <span class="n">current_total_head</span> <span class="o">-</span> <span class="n">pipe</span><span class="p">[</span><span class="s1">&#39;z_start&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;HGL&#39;</span><span class="p">:</span> <span class="n">current_hgl</span><span class="p">,</span>
+            <span class="s1">&#39;Pressure_Head&#39;</span><span class="p">:</span> <span class="n">current_hgl</span> <span class="o">-</span> <span class="n">pipe</span><span class="p">[</span><span class="s1">&#39;z_start&#39;</span><span class="p">],</span>
             <span class="s1">&#39;Velocity&#39;</span><span class="p">:</span> <span class="n">pipe</span><span class="p">[</span><span class="s1">&#39;velocity&#39;</span><span class="p">],</span>
             <span class="s1">&#39;Pipe_ID&#39;</span><span class="p">:</span> <span class="n">pipe_id</span>
         <span class="p">})</span>
         
-        <span class="c1"># Update for end of pipe</span>
+        <span class="c1"># Update values for the end of the pipe</span>
         <span class="n">cumulative_distance</span> <span class="o">+=</span> <span class="n">pipe</span><span class="p">[</span><span class="s1">&#39;L&#39;</span><span class="p">]</span>
-        <span class="n">current_total_head</span> <span class="o">-=</span> <span class="n">pipe</span><span class="p">[</span><span class="s1">&#39;head_loss&#39;</span><span class="p">]</span>
+        <span class="n">current_hgl</span> <span class="o">-=</span> <span class="n">pipe</span><span class="p">[</span><span class="s1">&#39;head_loss&#39;</span><span class="p">]</span>
         
+        <span class="c1"># Node at the end of the pipe</span>
         <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
             <span class="s1">&#39;Node&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Node_</span><span class="si">{</span><span class="n">pipe_id</span><span class="si">}</span><span class="s1">_end&#39;</span><span class="p">,</span>
             <span class="s1">&#39;Distance&#39;</span><span class="p">:</span> <span class="n">cumulative_distance</span><span class="p">,</span>
             <span class="s1">&#39;Elevation&#39;</span><span class="p">:</span> <span class="n">pipe</span><span class="p">[</span><span class="s1">&#39;z_end&#39;</span><span class="p">],</span>
-            <span class="s1">&#39;Total_Head&#39;</span><span class="p">:</span> <span class="n">current_total_head</span><span class="p">,</span>
-            <span class="s1">&#39;Pressure_Head&#39;</span><span class="p">:</span> <span class="n">current_total_head</span> <span class="o">-</span> <span class="n">pipe</span><span class="p">[</span><span class="s1">&#39;z_end&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;HGL&#39;</span><span class="p">:</span> <span class="n">current_hgl</span><span class="p">,</span>
+            <span class="s1">&#39;Pressure_Head&#39;</span><span class="p">:</span> <span class="n">current_hgl</span> <span class="o">-</span> <span class="n">pipe</span><span class="p">[</span><span class="s1">&#39;z_end&#39;</span><span class="p">],</span>
             <span class="s1">&#39;Velocity&#39;</span><span class="p">:</span> <span class="n">pipe</span><span class="p">[</span><span class="s1">&#39;velocity&#39;</span><span class="p">],</span>
             <span class="s1">&#39;Pipe_ID&#39;</span><span class="p">:</span> <span class="n">pipe_id</span>
         <span class="p">})</span>
@@ -697,35 +691,34 @@ The primary objective of this exercise is to develop a computational tool that a
 </section>
 </section>
 <hr class="docutils" />
-<section id="results-interpretation">
-<h2>5. Results Interpretation<a class="headerlink" href="#results-interpretation" title="Link to this heading">#</a></h2>
+<section id="interpreting-the-results">
+<h2>5. Interpreting the Results<a class="headerlink" href="#interpreting-the-results" title="Link to this heading">#</a></h2>
 <section id="hydraulic-performance-metrics">
 <h3>5.1 Hydraulic Performance Metrics<a class="headerlink" href="#hydraulic-performance-metrics" title="Link to this heading">#</a></h3>
-<p>Key performance indicators include:</p>
+<p>The primary outputs to check are:</p>
 <ul class="simple">
-<li><p><strong>Minimum Pressure Head</strong>: Must exceed service pressure requirements</p></li>
-<li><p><strong>Maximum Velocity</strong>: Should remain within acceptable limits</p></li>
-<li><p><strong>Total Head Loss</strong>: Affects pumping energy requirements</p></li>
-<li><p><strong>Pressure Variation</strong>: Indicates system stability</p></li>
+<li><p><strong>Minimum Pressure Head</strong>: Does it meet the service requirements at all nodes?</p></li>
+<li><p><strong>Maximum Velocity</strong>: Does it stay within acceptable limits to avoid system damage?</p></li>
+<li><p><strong>Total Head Loss</strong>: How much energy is lost? This directly impacts pumping costs.</p></li>
 </ul>
 </section>
 <section id="visualization-and-analysis">
 <h3>5.2 Visualization and Analysis<a class="headerlink" href="#visualization-and-analysis" title="Link to this heading">#</a></h3>
-<p>The analysis generates interactive plots showing:</p>
+<p>Plotting the results is the best way to understand them:</p>
 <ul class="simple">
-<li><p><strong>Hydraulic Grade Line</strong>: Shows available pressure throughout the system</p></li>
-<li><p><strong>Energy Grade Line</strong>: Illustrates total energy dissipation</p></li>
-<li><p><strong>Elevation Profile</strong>: Provides context for pressure analysis</p></li>
+<li><p>The <strong>Hydraulic Grade Line (HGL)</strong> plot shows the available pressure along the network.</p></li>
+<li><p>The <strong>Energy Grade Line (EGL)</strong> plot illustrates total energy dissipation due to friction.</p></li>
+<li><p>An <strong>Elevation Profile</strong> provides the physical context for the pressure analysis.</p></li>
 </ul>
 </section>
-<section id="design-optimization">
-<h3>5.3 Design Optimization<a class="headerlink" href="#design-optimization" title="Link to this heading">#</a></h3>
-<p>Use the tool to:</p>
+<section id="using-the-tool-for-design">
+<h3>5.3 Using the Tool for Design<a class="headerlink" href="#using-the-tool-for-design" title="Link to this heading">#</a></h3>
+<p>This analysis tool empowers you to:</p>
 <ol class="arabic simple">
-<li><p><strong>Identify Bottlenecks</strong>: Locate nodes with inadequate pressure</p></li>
-<li><p><strong>Evaluate Alternatives</strong>: Compare different diameter combinations</p></li>
-<li><p><strong>Optimize Costs</strong>: Balance pipe costs against energy costs</p></li>
-<li><p><strong>Verify Constraints</strong>: Ensure all design criteria are satisfied</p></li>
+<li><p><strong>Identify Bottlenecks</strong>: Quickly find nodes with low pressure.</p></li>
+<li><p><strong>Evaluate Alternatives</strong>: Compare the hydraulic performance of different diameter combinations.</p></li>
+<li><p><strong>Optimize for Cost</strong>: Provide the hydraulic data needed to balance pipe costs and energy costs.</p></li>
+<li><p><strong>Verify Constraints</strong>: Ensure your final design meets all hydraulic requirements.</p></li>
 </ol>
 </section>
 </section>
@@ -734,33 +727,11 @@ The primary objective of this exercise is to develop a computational tool that a
 <h2>6. Practical Applications<a class="headerlink" href="#practical-applications" title="Link to this heading">#</a></h2>
 <section id="sensitivity-analysis">
 <h3>6.1 Sensitivity Analysis<a class="headerlink" href="#sensitivity-analysis" title="Link to this heading">#</a></h3>
-<p>Systematically vary pipe diameters to understand:</p>
-<ul class="simple">
-<li><p>Impact on minimum system pressure</p></li>
-<li><p>Changes in total head loss</p></li>
-<li><p>Velocity distribution effects</p></li>
-<li><p>Economic implications</p></li>
-</ul>
+<p>You can systematically vary pipe diameters to understand their impact on system pressures and velocities. This helps in identifying the most critical pipes in the network.</p>
 </section>
-<section id="design-scenarios">
-<h3>6.2 Design Scenarios<a class="headerlink" href="#design-scenarios" title="Link to this heading">#</a></h3>
-<p>Consider multiple operating conditions:</p>
-<ul class="simple">
-<li><p><strong>Average Day Demand</strong>: Typical consumption patterns</p></li>
-<li><p><strong>Peak Hour Demand</strong>: Maximum system stress</p></li>
-<li><p><strong>Fire Flow Conditions</strong>: Emergency capacity requirements</p></li>
-<li><p><strong>Future Growth</strong>: Projected demand increases</p></li>
-</ul>
-</section>
-<section id="regulatory-compliance">
-<h3>6.3 Regulatory Compliance<a class="headerlink" href="#regulatory-compliance" title="Link to this heading">#</a></h3>
-<p>Ensure designs meet:</p>
-<ul class="simple">
-<li><p>Local building codes and standards</p></li>
-<li><p>Water utility design criteria</p></li>
-<li><p>Environmental regulations</p></li>
-<li><p>Safety requirements</p></li>
-</ul>
+<section id="optimization-input">
+<h3>6.2 Optimization Input<a class="headerlink" href="#optimization-input" title="Link to this heading">#</a></h3>
+<p>The calculated head losses and pressures are essential inputs for optimization algorithms that aim to find the least-cost design while satisfying all hydraulic constraints. This topic is covered in the next chapters.</p>
 </section>
 </section>
 <hr class="docutils" />
@@ -877,7 +848,7 @@ The primary objective of this exercise is to develop a computational tool that a
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Choosing the Optimal Pipe Diameter in a Water Supply System</p>
+        <p class="prev-next-title">Chapter 2: Choosing the Optimal Pipe Diameter in a Water Supply System</p>
       </div>
     </a>
     <a class="right-next"
@@ -885,7 +856,7 @@ The primary objective of this exercise is to develop a computational tool that a
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Designing Branched Water Networks with <code class="docutils literal notranslate"><span class="pre">BNHA</span></code></p>
+        <p class="prev-next-title">Chapter 4: Optimization of Branched Networks</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -905,42 +876,37 @@ The primary objective of this exercise is to develop a computational tool that a
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Branch Network Hydraulic Analysis</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 3: Branch Network Hydraulic Analysis</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1. Introduction</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Branch Network Hydraulic Analysis</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-branched-networks">1. Introduction to Branched Networks</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-background">2. Theoretical Background</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazen-williams-equation">2.1 Hazen-Williams Equation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazen-williams-roughness-coefficients">2.2 Hazen-Williams Roughness Coefficients</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-and-hydraulic-grade-lines">2.3 Energy and Hydraulic Grade Lines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hazen-williams-roughness-coefficients-c">2.2 Hazen-Williams Roughness Coefficients (<span class="math notranslate nohighlight">\(C\)</span>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-and-hydraulic-grade-lines-egl-hgl">2.3 Energy and Hydraulic Grade Lines (EGL &amp; HGL)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methodology">3. Methodology</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methodology-for-analysis">3. Methodology for Analysis</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#network-representation">3.1 Network Representation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-algorithm">3.2 Solution Algorithm</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#design-considerations">3.3 Design Considerations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-design-considerations">3.3 Key Design Considerations</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation-guide">4. Implementation Guide</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-implementation-guide">4. Python Implementation Guide</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#required-libraries">4.1 Required Libraries</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#head-loss-function">4.2 Head Loss Function</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-calculation">4.3 Velocity Calculation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-function">4.3 Velocity Function</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#network-analysis-function">4.4 Network Analysis Function</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results-interpretation">5. Results Interpretation</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-the-results">5. Interpreting the Results</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hydraulic-performance-metrics">5.1 Hydraulic Performance Metrics</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization-and-analysis">5.2 Visualization and Analysis</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#design-optimization">5.3 Design Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-tool-for-design">5.3 Using the Tool for Design</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-applications">6. Practical Applications</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-analysis">6.1 Sensitivity Analysis</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#design-scenarios">6.2 Design Scenarios</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regulatory-compliance">6.3 Regulatory Compliance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-input">6.2 Optimization Input</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-and-assumptions">7. Limitations and Assumptions</a><ul class="nav section-nav flex-column">

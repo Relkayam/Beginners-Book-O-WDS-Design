@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Designing Branched Water Networks with BNHA &#8212; Optimizing Water Distribution System Design</title>
+    <title>Chapter 4: Optimization of Branched Networks &#8212; Optimizing Water Distribution System Design</title>
   
   
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Optimization_of_branch_networks';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Branch Network Optimization – Full Example" href="Branch_Calculation_Example.html" />
-    <link rel="prev" title="Branch Network Hydraulic Analysis" href="branch_calculation.html" />
+    <link rel="next" title="Chapter 5: Branch Network Optimization – Full Example" href="Branch_Calculation_Example.html" />
+    <link rel="prev" title="Chapter 3: Branch Network Hydraulic Analysis" href="branch_calculation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -177,18 +177,21 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    About this Book
+                    Welcome to the Water Distribution System Design Book
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Core Chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Economic_diameter.html">Chapter 2: Choosing the Optimal Pipe Diameter in a Water Supply System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="branch_calculation.html">Chapter 3: Branch Network Hydraulic Analysis</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 4: Optimization of Branched Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Branch_Calculation_Example.html">Chapter 5: Branch Network Optimization – Full Example</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="python_essential.html">Python Essentials: Jupyter Notebooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Economic_diameter.html">Choosing the Optimal Pipe Diameter in a Water Supply System</a></li>
-<li class="toctree-l1"><a class="reference internal" href="branch_calculation.html">Branch Network Hydraulic Analysis</a></li>
-
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Designing Branched Water Networks with <code class="docutils literal notranslate"><span class="pre">BNHA</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="Branch_Calculation_Example.html">Branch Network Optimization – Full Example</a></li>
 </ul>
 
     </div>
@@ -374,7 +377,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Designing Branched Water Networks with BNHA</h1>
+    <h1>Chapter 4: Optimization of Branched Networks</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -384,17 +387,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-the-bnha-package">Overview of the <code class="docutils literal notranslate"><span class="pre">BNHA</span></code> Package</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notation">Notation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-methodologies">Optimization Methodologies</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-diameter-optimization-mip">Discrete Diameter Optimization (MIP)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-length-optimization-lp">Continuous-Length Optimization (LP)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hydraulic-calculations">Hydraulic Calculations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-network-optimization">1. Introduction to Network Optimization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-the-bnha-package">2. Overview of the <code class="docutils literal notranslate"><span class="pre">BNHA</span></code> Package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation">3. Mathematical Formulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-methodologies">4. Optimization Methodologies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-diameter-optimization-mixed-integer-programming">4.1 Discrete Diameter Optimization (Mixed-Integer Programming)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-length-optimization-linear-programming">4.2 Continuous-Length Optimization (Linear Programming)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-usage-examples">Practical Usage Examples</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next Steps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-theory-to-practice">5. From Theory to Practice</a></li>
 </ul>
             </nav>
         </div>
@@ -406,124 +407,145 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="designing-branched-water-networks-with-bnha">
-<h1>Designing Branched Water Networks with <code class="docutils literal notranslate"><span class="pre">BNHA</span></code><a class="headerlink" href="#designing-branched-water-networks-with-bnha" title="Link to this heading">#</a></h1>
-<section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
-<p>This chapter focuses on the design and analysis of branched water distribution systems, which form tree-like structures without loops, as commonly found in rural water supply, irrigation, or preliminary urban planning. We introduce <code class="docutils literal notranslate"><span class="pre">BNHA</span></code> (Branched Network Hydraulic Analysis), a Python-based tool developed to streamline the optimization and hydraulic analysis of these systems. <code class="docutils literal notranslate"><span class="pre">BNHA</span></code> automates pipe sizing and performance calculations, making it a practical resource for engineers working on cost-effective and hydraulically sound designs. This chapter covers the tool’s functionality, underlying mathematics, and practical applications, complemented by a Jupyter Notebook for hands-on implementation.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-4-optimization-of-branched-networks">
+<h1>Chapter 4: Optimization of Branched Networks<a class="headerlink" href="#chapter-4-optimization-of-branched-networks" title="Link to this heading">#</a></h1>
+<section id="introduction-to-network-optimization">
+<h2>1. Introduction to Network Optimization<a class="headerlink" href="#introduction-to-network-optimization" title="Link to this heading">#</a></h2>
+<p>In the previous chapter, we learned how to perform a hydraulic analysis of a branched network with known pipe diameters. While essential, analysis is only half the story. The real engineering challenge lies in <strong>design</strong>: selecting the most cost-effective pipe diameters that still meet all hydraulic requirements. This process is known as <strong>optimization</strong>.</p>
+<p>This chapter introduces the core concepts and mathematical methods for optimizing branched water networks. We will use the <code class="docutils literal notranslate"><span class="pre">BNHA</span></code> (Branched Network Hydraulic Analysis) Python package, an open-source tool designed specifically for this purpose. <code class="docutils literal notranslate"><span class="pre">BNHA</span></code> automates the complex task of pipe sizing, allowing us to focus on the design principles.</p>
 </section>
 <section id="overview-of-the-bnha-package">
-<h2>Overview of the <code class="docutils literal notranslate"><span class="pre">BNHA</span></code> Package<a class="headerlink" href="#overview-of-the-bnha-package" title="Link to this heading">#</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">BNHA</span></code> package is an open-source Python tool designed for the efficient design and analysis of branched water distribution networks. It supports engineers in optimizing pipe diameters and performing hydraulic calculations, reducing reliance on manual methods. Key features include:</p>
+<h2>2. Overview of the <code class="docutils literal notranslate"><span class="pre">BNHA</span></code> Package<a class="headerlink" href="#overview-of-the-bnha-package" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">BNHA</span></code> package is a powerful tool for designing and analyzing branched water distribution networks. Its key features include:</p>
 <ul class="simple">
-<li><p><strong>Pipe Diameter Optimization:</strong> Selects cost-effective pipe sizes while meeting hydraulic constraints like minimum pressure.</p></li>
-<li><p><strong>Hydraulic Analysis:</strong> Computes head loss, velocity, and pressure across the network.</p></li>
-<li><p><strong>Diagnostics and Verification:</strong> Exports optimization models and constraint details for troubleshooting and validation.</p></li>
+<li><p><strong>Pipe Diameter Optimization:</strong> Automatically selects the least-cost pipe sizes from a given catalog while satisfying hydraulic constraints, such as minimum pressure.</p></li>
+<li><p><strong>Hydraulic Analysis:</strong> Computes head loss, velocity, and pressure across the network for a given design.</p></li>
+<li><p><strong>Diagnostics and Verification:</strong> Exports the underlying optimization models and constraint details, which is invaluable for troubleshooting and validating designs.</p></li>
 </ul>
-<p>Built on Python libraries such as <code class="docutils literal notranslate"><span class="pre">pandas</span></code> for data management, <code class="docutils literal notranslate"><span class="pre">NumPy</span></code> for numerical operations, and <code class="docutils literal notranslate"><span class="pre">PuLP</span></code> for optimization, <code class="docutils literal notranslate"><span class="pre">BNHA</span></code> is accessible and robust. Source code and documentation are available at <a class="github reference external" href="https://github.com/Relkayam/BNHA">Relkayam/BNHA</a>.</p>
+<p>It is built on common Python libraries like <code class="docutils literal notranslate"><span class="pre">pandas</span></code> for data management, <code class="docutils literal notranslate"><span class="pre">NumPy</span></code> for numerical operations, and <code class="docutils literal notranslate"><span class="pre">PuLP</span></code> for solving optimization problems. The source code and further documentation are available on <a class="reference external" href="https://github.com/Relkayam/BNHA">GitHub</a>.</p>
 </section>
-<section id="notation">
-<h2>Notation<a class="headerlink" href="#notation" title="Link to this heading">#</a></h2>
-<p>The following notation is used in <code class="docutils literal notranslate"><span class="pre">BNHA</span></code>’s mathematical models and hydraulic calculations:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\( \mathcal{P} \)</span>: Set of all pipes in the network.</p></li>
-<li><p><span class="math notranslate nohighlight">\( \mathcal{B} \)</span>: Set of terminal branch paths (from source to end nodes).</p></li>
-<li><p><span class="math notranslate nohighlight">\( \mathcal{D}_i \)</span>: Set of available diameters for pipe <span class="math notranslate nohighlight">\( i \in \mathcal{P} \)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\( \mathcal{S}_i \)</span>: Set of sub-segments for pipe <span class="math notranslate nohighlight">\( i \)</span> in the continuous model.</p></li>
-<li><p><span class="math notranslate nohighlight">\( dz_p \)</span>: Elevation drop along path <span class="math notranslate nohighlight">\( p \in \mathcal{B} \)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\( h_{\min} \)</span>: Minimum required pressure head at terminal nodes.</p></li>
-<li><p><span class="math notranslate nohighlight">\( \varepsilon \)</span>: Pressure tolerance for numerical feasibility.</p></li>
-<li><p><span class="math notranslate nohighlight">\( L_i \)</span>: Length of pipe <span class="math notranslate nohighlight">\( i \)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\( c_{i,d} \)</span>: Cost of using diameter <span class="math notranslate nohighlight">\( d \)</span> for pipe <span class="math notranslate nohighlight">\( i \)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\( h_{i,d} \)</span>: Head loss for pipe <span class="math notranslate nohighlight">\( i \)</span> with diameter <span class="math notranslate nohighlight">\( d \)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\( x_{i,d} \)</span>: Binary variable; 1 if diameter <span class="math notranslate nohighlight">\( d \)</span> is chosen for pipe <span class="math notranslate nohighlight">\( i \)</span>, 0 otherwise.</p></li>
-<li><p><span class="math notranslate nohighlight">\( l_j \)</span>: Length of sub-segment <span class="math notranslate nohighlight">\( j \)</span> in the continuous model.</p></li>
-<li><p><span class="math notranslate nohighlight">\( c_j \)</span>: Cost per meter for sub-segment <span class="math notranslate nohighlight">\( j \)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\( h'_j \)</span>: Head loss per meter for sub-segment <span class="math notranslate nohighlight">\( j \)</span>.</p></li>
-</ul>
-<p>Refer to this notation when working through the optimization models or the Jupyter Notebook.</p>
+<section id="mathematical-formulation">
+<h2>3. Mathematical Formulation<a class="headerlink" href="#mathematical-formulation" title="Link to this heading">#</a></h2>
+<p>To understand how optimization works, we must first define the mathematical notation used in the models.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Notation</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(\mathcal{P}\)</span></p></td>
+<td class="text-left"><p>The set of all pipes in the network.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(\mathcal{B}\)</span></p></td>
+<td class="text-left"><p>The set of all unique paths from the source to a terminal node.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(\mathcal{D}_i\)</span></p></td>
+<td class="text-left"><p>The set of available commercial diameters for pipe <span class="math notranslate nohighlight">\(i \in \mathcal{P}\)</span>.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(\mathcal{S}_i\)</span></p></td>
+<td class="text-left"><p>The set of sub-segments for pipe <span class="math notranslate nohighlight">\(i\)</span> in the continuous-length model.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(dz_p\)</span></p></td>
+<td class="text-left"><p>The available static head (elevation drop) along a path <span class="math notranslate nohighlight">\(p \in \mathcal{B}\)</span>.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(h_{\min}\)</span></p></td>
+<td class="text-left"><p>The minimum required pressure head at any terminal node.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(L_i\)</span></p></td>
+<td class="text-left"><p>The length of pipe <span class="math notranslate nohighlight">\(i\)</span>.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(c_{i,d}\)</span></p></td>
+<td class="text-left"><p>The cost of selecting diameter <span class="math notranslate nohighlight">\(d\)</span> for pipe <span class="math notranslate nohighlight">\(i\)</span>.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(h_{i,d}\)</span></p></td>
+<td class="text-left"><p>The head loss in pipe <span class="math notranslate nohighlight">\(i\)</span> if diameter <span class="math notranslate nohighlight">\(d\)</span> is chosen.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(x_{i,d}\)</span></p></td>
+<td class="text-left"><p>A binary decision variable: 1 if diameter <span class="math notranslate nohighlight">\(d\)</span> is chosen for pipe <span class="math notranslate nohighlight">\(i\)</span>, 0 otherwise.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(l_j\)</span></p></td>
+<td class="text-left"><p>The length of a sub-segment <span class="math notranslate nohighlight">\(j\)</span> in the continuous-length model.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(c_j\)</span></p></td>
+<td class="text-left"><p>The cost per meter for a sub-segment <span class="math notranslate nohighlight">\(j\)</span>.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(h'_j\)</span></p></td>
+<td class="text-left"><p>The head loss per meter for a sub-segment <span class="math notranslate nohighlight">\(j\)</span>.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(\varepsilon\)</span></p></td>
+<td class="text-left"><p>A small pressure tolerance for numerical stability.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
+<hr class="docutils" />
 <section id="optimization-methodologies">
-<h2>Optimization Methodologies<a class="headerlink" href="#optimization-methodologies" title="Link to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">BNHA</span></code> provides two optimization approaches for pipe sizing: Discrete Diameter Optimization and Continuous-Length Optimization. These methods address different design needs and are detailed below.</p>
-<section id="discrete-diameter-optimization-mip">
-<h3>Discrete Diameter Optimization (MIP)<a class="headerlink" href="#discrete-diameter-optimization-mip" title="Link to this heading">#</a></h3>
-<p>This method selects a single diameter per pipe from a predefined catalog, optimizing for cost while ensuring hydraulic feasibility.</p>
-<p><strong>Objective:</strong> Minimize total cost:
-$<span class="math notranslate nohighlight">\(
+<h2>4. Optimization Methodologies<a class="headerlink" href="#optimization-methodologies" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">BNHA</span></code> implements two primary optimization approaches for pipe sizing: Discrete and Continuous.</p>
+<section id="discrete-diameter-optimization-mixed-integer-programming">
+<h3>4.1 Discrete Diameter Optimization (Mixed-Integer Programming)<a class="headerlink" href="#discrete-diameter-optimization-mixed-integer-programming" title="Link to this heading">#</a></h3>
+<p>This is the most common design scenario. The model selects <strong>one single diameter</strong> for each pipe from a predefined catalog of commercial sizes to minimize total cost while meeting pressure requirements.</p>
+<p><strong>Objective: Minimize Total Pipe Cost</strong></p>
+<div class="math notranslate nohighlight">
+\[
 \min \sum_{i \in \mathcal{P}} \sum_{d \in \mathcal{D}_i} x_{i,d} \cdot c_{i,d}
-\)</span>$</p>
+\]</div>
 <p><strong>Constraints:</strong></p>
-<ol class="arabic simple">
-<li><p><strong>Single Diameter Selection:</strong> Each pipe is assigned one diameter:
-$<span class="math notranslate nohighlight">\(
-\sum_{d \in \mathcal{D}_i} x_{i,d} = 1 \quad \forall i \in \mathcal{P}
-\)</span>$</p></li>
-<li><p><strong>Pressure Constraint:</strong> Head loss along each path must not exceed the available elevation drop minus minimum pressure:
-$<span class="math notranslate nohighlight">\(
-\sum_{i \in p} \sum_{d \in \mathcal{D}_i} x_{i,d} \cdot h_{i,d} \leq dz_p - h_{\min}
-\)</span>$</p></li>
+<ol class="arabic">
+<li><p><strong>Single Diameter per Pipe:</strong> Ensures exactly one diameter is chosen for each pipe.</p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{d \in \mathcal{D}_i} x_{i,d} = 1 \quad \forall i \in \mathcal{P}
+    \]</div>
+</li>
+<li><p><strong>Minimum Pressure Requirement:</strong> The total head loss along any path cannot exceed the available head (static head minus minimum required pressure).</p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{i \in p} \sum_{d \in \mathcal{D}_i} x_{i,d} \cdot h_{i,d} \leq dz_p - h_{\min} \quad \forall p \in \mathcal{B}
+    \]</div>
+</li>
 </ol>
-<p>This Mixed-Integer Programming (MIP) problem is solved using <code class="docutils literal notranslate"><span class="pre">PuLP</span></code>.</p>
+<p>This formulation is a <strong>Mixed-Integer Programming (MIP)</strong> problem, which <code class="docutils literal notranslate"><span class="pre">BNHA</span></code> solves using the <code class="docutils literal notranslate"><span class="pre">PuLP</span></code> library.</p>
 </section>
-<section id="continuous-length-optimization-lp">
-<h3>Continuous-Length Optimization (LP)<a class="headerlink" href="#continuous-length-optimization-lp" title="Link to this heading">#</a></h3>
-<p>This approach allows pipes to be divided into segments with varying diameters, enabling designs like tapered pipelines for enhanced efficiency.</p>
-<p><strong>Objective:</strong> Minimize total cost:
-$<span class="math notranslate nohighlight">\(
+<section id="continuous-length-optimization-linear-programming">
+<h3>4.2 Continuous-Length Optimization (Linear Programming)<a class="headerlink" href="#continuous-length-optimization-linear-programming" title="Link to this heading">#</a></h3>
+<p>This advanced method allows a single pipe to be constructed from <strong>multiple segments of different diameters</strong>. This is useful for designing long, tapered pipelines where hydraulic efficiency can be significantly improved.</p>
+<p><strong>Objective: Minimize Total Pipe Cost</strong></p>
+<div class="math notranslate nohighlight">
+\[
 \min \sum_{j} l_j \cdot c_j
-\)</span>$</p>
+\]</div>
 <p><strong>Constraints:</strong></p>
-<ol class="arabic simple">
-<li><p><strong>Length Preservation:</strong> Segment lengths sum to the pipe’s total length:
-$<span class="math notranslate nohighlight">\(
-\sum_{j \in \mathcal{S}_i} l_j = L_i \quad \forall i \in \mathcal{P}
-\)</span>$</p></li>
-<li><p><strong>Pressure Constraint:</strong> Head loss along each path respects elevation and pressure limits:
-$<span class="math notranslate nohighlight">\(
-\sum_{j \in p} l_j \cdot h'_j \leq dz_p - h_{\min} - \varepsilon
-\)</span>$</p></li>
+<ol class="arabic">
+<li><p><strong>Conservation of Length:</strong> The sum of segment lengths must equal the total length of the pipe.</p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{j \in \mathcal{S}_i} l_j = L_i \quad \forall i \in \mathcal{P}
+    \]</div>
+</li>
+<li><p><strong>Minimum Pressure Requirement:</strong> The total head loss along any path must be within the available head.</p>
+<div class="math notranslate nohighlight">
+\[
+    \sum_{j \in p} l_j \cdot h'_j \leq dz_p - h_{\min} - \varepsilon
+    \]</div>
+</li>
 </ol>
-<p>This Linear Programming (LP) problem is computationally efficient and suitable for complex designs.</p>
-</section>
-<section id="hydraulic-calculations">
-<h3>Hydraulic Calculations<a class="headerlink" href="#hydraulic-calculations" title="Link to this heading">#</a></h3>
-<p>Both optimization methods use the Hazen-Williams equation for head loss:
-$<span class="math notranslate nohighlight">\(
-h = 10.67 \cdot \left( \frac{L \cdot Q^{1.852}}{C^{1.852} \cdot D^{4.871}} \right)
-\)</span>$
-Where:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\( L \)</span>: Pipe length (m)</p></li>
-<li><p><span class="math notranslate nohighlight">\( Q \)</span>: Flow rate (m³/s)</p></li>
-<li><p><span class="math notranslate nohighlight">\( C \)</span>: Roughness coefficient</p></li>
-<li><p><span class="math notranslate nohighlight">\( D \)</span>: Diameter (m)</p></li>
-</ul>
-<p>Additional calculations include:</p>
-<ul class="simple">
-<li><p><strong>Velocity:</strong> <span class="math notranslate nohighlight">\( v = \dfrac{4Q}{\pi D^2} \)</span></p></li>
-<li><p><strong>Pressure Head:</strong> <span class="math notranslate nohighlight">\( H_{\text{pressure}} = H_{\text{source}} - \sum h_i - z \)</span></p></li>
-</ul>
-<p>Outputs are provided as structured tables (<code class="docutils literal notranslate"><span class="pre">df_res</span></code>, <code class="docutils literal notranslate"><span class="pre">results_branch</span></code>, <code class="docutils literal notranslate"><span class="pre">pipes_summery</span></code>) with debugging tools for constraint analysis.</p>
+<p>This is a <strong>Linear Programming (LP)</strong> problem, which is computationally faster to solve than MIP problems.</p>
 </section>
 </section>
-<section id="practical-usage-examples">
-<h2>Practical Usage Examples<a class="headerlink" href="#practical-usage-examples" title="Link to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">BNHA</span></code> supports a range of practical applications, demonstrated through the following examples. These will be implemented in the accompanying Jupyter Notebook.</p>
+<hr class="docutils" />
+<section id="from-theory-to-practice">
+<h2>5. From Theory to Practice<a class="headerlink" href="#from-theory-to-practice" title="Link to this heading">#</a></h2>
+<p>The next chapter provides a complete, hands-on Jupyter Notebook to guide you through using these optimization methods with <code class="docutils literal notranslate"><span class="pre">BNHA</span></code>. We will explore practical scenarios, including:</p>
 <ol class="arabic simple">
-<li><p><strong>Hydraulic Analysis of Existing Networks:</strong>
-For an existing branched network, such as a rural water system, <code class="docutils literal notranslate"><span class="pre">BNHA</span></code> calculates head loss, velocity, and pressure. Input pipe lengths, diameters, and flows to generate a table of pressures at terminal nodes, verifying compliance with design standards or identifying issues.</p></li>
-<li><p><strong>Pipe Diameter Optimization for New Designs:</strong>
-When designing a new system, like an irrigation network, use the Discrete Diameter Optimization model. Provide elevation data, flow requirements, and a diameter catalog, and <code class="docutils literal notranslate"><span class="pre">BNHA</span></code> will select cost-optimal pipe sizes that maintain required pressures.</p></li>
-<li><p><strong>Tapered Pipeline Design:</strong>
-For long pipelines, such as those supplying remote areas, the Continuous-Length Optimization model designs tapered systems. By allowing multiple diameters per pipe, <code class="docutils literal notranslate"><span class="pre">BNHA</span></code> optimizes cost and hydraulic performance, ideal for large-scale projects.</p></li>
+<li><p><strong>Analyzing an Existing Network:</strong> Calculating pressures and velocities to identify hydraulic bottlenecks.</p></li>
+<li><p><strong>Optimizing a New Design:</strong> Using the discrete model to find the most economical pipe diameters for a new irrigation system.</p></li>
+<li><p><strong>Designing a Tapered Pipeline:</strong> Applying the continuous model to a long transmission main to optimize performance and cost.</p></li>
 </ol>
-<p>These examples leverage <code class="docutils literal notranslate"><span class="pre">pandas</span></code> for input and output management, ensuring clear and actionable results. The Jupyter Notebook provides sample code and data to explore these scenarios.</p>
-</section>
-<section id="next-steps">
-<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading">#</a></h2>
-<p>This chapter equips you with the tools to design and analyze branched water networks using <code class="docutils literal notranslate"><span class="pre">BNHA</span></code>. The accompanying Jupyter Notebook offers practical implementations of the examples above, guiding you through setup, optimization, and result interpretation. Explore different network configurations and parameters to deepen your understanding. <code class="docutils literal notranslate"><span class="pre">BNHA</span></code> is a versatile tool for both engineering practice and project development.</p>
-<p><strong>Source code and documentation:</strong> <a class="github reference external" href="https://github.com/Relkayam/BNHA">Relkayam/BNHA</a></p>
+<p>These examples will demonstrate how to structure input data using <code class="docutils literal notranslate"><span class="pre">pandas</span></code> and interpret the results to make informed engineering decisions.</p>
+<p><strong>Ready to get started? Let’s move to the next chapter to put this theory into practice.</strong></p>
 </section>
 </section>
 
@@ -563,7 +585,7 @@ For long pipelines, such as those supplying remote areas, the Continuous-Length 
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Branch Network Hydraulic Analysis</p>
+        <p class="prev-next-title">Chapter 3: Branch Network Hydraulic Analysis</p>
       </div>
     </a>
     <a class="right-next"
@@ -571,7 +593,7 @@ For long pipelines, such as those supplying remote areas, the Continuous-Length 
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Branch Network Optimization – Full Example</p>
+        <p class="prev-next-title">Chapter 5: Branch Network Optimization – Full Example</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -591,17 +613,15 @@ For long pipelines, such as those supplying remote areas, the Continuous-Length 
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-the-bnha-package">Overview of the <code class="docutils literal notranslate"><span class="pre">BNHA</span></code> Package</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notation">Notation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-methodologies">Optimization Methodologies</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-diameter-optimization-mip">Discrete Diameter Optimization (MIP)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-length-optimization-lp">Continuous-Length Optimization (LP)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hydraulic-calculations">Hydraulic Calculations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-network-optimization">1. Introduction to Network Optimization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-the-bnha-package">2. Overview of the <code class="docutils literal notranslate"><span class="pre">BNHA</span></code> Package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation">3. Mathematical Formulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-methodologies">4. Optimization Methodologies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-diameter-optimization-mixed-integer-programming">4.1 Discrete Diameter Optimization (Mixed-Integer Programming)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-length-optimization-linear-programming">4.2 Continuous-Length Optimization (Linear Programming)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-usage-examples">Practical Usage Examples</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next Steps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-theory-to-practice">5. From Theory to Practice</a></li>
 </ul>
   </nav></div>
 
