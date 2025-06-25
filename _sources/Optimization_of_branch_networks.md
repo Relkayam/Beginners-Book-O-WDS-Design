@@ -2,9 +2,9 @@
 
 ## 1. Introduction to Network Optimization
 
-In the previous chapter, we learned how to perform a hydraulic analysis of a branched network with known pipe diameters. While essential, analysis is only half the story. The real engineering challenge lies in **design**: selecting the most cost-effective pipe diameters that still meet all hydraulic requirements. This process is known as **optimization**.
+In the previous chapter, I explained how to perform a hydraulic analysis of a branched network with known pipe diameters. While essential, analysis is only half the story. The real engineering challenge lies in **design**: selecting the most cost-effective pipe diameters that still meet all hydraulic requirements. This process is known as **optimization**.
 
-This chapter introduces the core concepts and mathematical methods for optimizing branched water networks. We will use the `BNHA` (Branched Network Hydraulic Analysis) Python package, an open-source tool designed specifically for this purpose. `BNHA` automates the complex task of pipe sizing, allowing us to focus on the design principles.
+This chapter introduces the core concepts and mathematical methods for optimizing branched water networks. I will use the `BNHA` (Branched Network Hydraulic Analysis) Python package, an open-source tool designed specifically for this purpose. `BNHA` automates the complex task of pipe sizing, allowing you to focus on the design principles.
 
 ## 2. Overview of the `BNHA` Package
 
@@ -18,7 +18,7 @@ It is built on common Python libraries like `pandas` for data management, `NumPy
 
 ## 3. Mathematical Formulation
 
-To understand how optimization works, we must first define the mathematical notation used in the models.
+To understand how optimization works, I must first define the mathematical notation used in the models.
 
 | Notation | Description |
 | :--- | :--- |
@@ -99,7 +99,7 @@ This is a **Linear Programming (LP)** problem, which is computationally faster t
 
 ## 5. From Theory to Practice
 
-The next chapter provides a complete, hands-on Jupyter Notebook to guide you through using these optimization methods with `BNHA`. We will explore practical scenarios, including:
+The next chapter provides a complete, hands-on Jupyter Notebook to guide you through using these optimization methods with `BNHA`. I will explore practical scenarios, including:
 
 1.  **Analyzing an Existing Network:** Calculating pressures and velocities to identify hydraulic bottlenecks.
 2.  **Optimizing a New Design:** Using the discrete model to find the most economical pipe diameters for a new irrigation system.

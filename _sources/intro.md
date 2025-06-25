@@ -22,7 +22,7 @@ This book is organized into four core chapters that build upon one another, from
 3.  **Chapter 4: [Optimization of Branched Networks](Optimization_of_branch_networks.md)**  
     Explore the mathematical methods for optimizing pipe sizes to achieve a least-cost, hydraulically sound design.
 
-4.  **Chapter 5: [Complete Design Example](Branch_Calculation_Example.ipynb)**  
+4.  **Chapter 5: [Complete Design Example](Branch_Calculation_Example.md)**  
     Walk through a complete, hands-on example, from loading network data to performing optimization and interpreting the results.
 
 ---
@@ -33,5 +33,5 @@ For those new to Python or in need of a refresher, the **[Appendix A: Python Ess
 
 ---
 
-We hope this book helps you build both your understanding and your confidence in designing efficient, reliable water distribution systems. Happy learning!
+I hope this book helps you build both your understanding and your confidence in designing efficient, reliable water distribution systems. Happy learning!
 
