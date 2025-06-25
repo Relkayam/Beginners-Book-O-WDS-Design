@@ -107,4 +107,15 @@ The next chapter provides a complete, hands-on Jupyter Notebook to guide you thr
 
 These examples will demonstrate how to structure input data using `pandas` and interpret the results to make informed engineering decisions.
 
+---
+
+## References
+
+1. Walski, T.M., et al. (2003). *Advanced Water Distribution Modeling and Management*. Haestad Press.
+2. Rossman, L.A. (2000). *EPANET 2 Users Manual*. EPA/600/R-00/057.
+3. Mays, L.W. (2000). *Water Distribution Systems Handbook*. McGraw-Hill.
+4. AWWA (2012). *Water Distribution System Design*. Manual M32, American Water Works Association.
+
+
+
 **Ready to get started? Let's move to the next chapter to put this theory into practice.**
