@@ -1,0 +1,17 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+parts:
+  - caption: "Core Chapters"
+    chapters:
+    - file: Economic_diameter
+    - file: branch_calculation
+    - file: Optimization_of_branch_networks
+    - file: Branch_Calculation_Example
+  - caption: "Appendix"
+    chapters:
+    - file: python_essential
+#- file: 001S_OptiBranch
+#- file: 002S_OptiBranch
