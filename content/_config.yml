@@ -30,3 +30,11 @@ repository:
 html:
   use_issues_button: true
   use_repository_button: true
+
+# Sphinx configuration
+sphinx:
+  config:
+    # Override the copyright year
+    copyright: "2025, Roy Elkayam"
+    # Alternative: use current year dynamically
+    # copyright: "© Copyright 2025"
